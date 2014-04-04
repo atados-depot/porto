@@ -1,0 +1,43 @@
+<div class="card-outer" ng-class="{true: 'col-lg-3 col-md-4 col-sm-5 col-xs-6',  false: 'col-lg-4 col-md-5 col-sm-6'}[landing]" ng-mouseenter="selectMarker(null, project)" ng-mouseleave="removeMarker(null, project)" itemscope>
+  <div class="card" id="card-{{project.slug}}">
+    <div class="card-img">
+      <div class="card-description"> 
+        <a ui-sref="root.project({slug: project.slug})">
+          <p>{{project.description}}</p>
+        </a>
+        <div tooltip="Compartilhe esse ato na sua timeline!" class="fb-share-button" data-href="http://www.atadoslocal.com.br:9000/ato/{{project.slug}}" data-type="icon"></div>
+      </div>
+      <img alt="{{project.slug}}" class="projectImg" ng-src="{{ project.image_url }}">
+    </div>
+    <div class="card-footer clearfix">
+      <a class="card-name" ui-sref="root.project({slug: project.slug})"><h4>{{ project.name}}</h4></a>
+      <div class="row card-quick-info">
+        <a ui-sref="root.nonprofit({slug: project.nonprofit_slug})" class="nonprofit-img">
+          <img alt="{{project.nonprofit_slug}}" ui-sref="root.nonprofit({slug: project.nonprofit_slug})" ng-src="{{ project.nonprofit_image }}">
+        </a>
+        <span>
+          <a ui-sref="root.nonprofit({slug: project.nonprofit_slug})"><p class="nonprofit-name"><strong>{{project.nonprofit_name}}</strong></p></a>
+          <p class="card-local"><i class="fa fa-map-marker"></i> {{ project.city_state }}</p>
+          <div class="card-icons">
+            <div class="img-circle icon-image" ng-repeat="cause in project.causes"> 
+              <img alt="{{cause.name}}" tooltip="Causa: {{cause.name}}" width="15" height="15" ng-src="{{cause.image}}"/>
+            </div>
+            <div alt="{{skill.name}}" class="img-circle icon-image" ng-repeat="skill in project.skills"> 
+              <img tooltip="Habilidade: {{skill.name}}" width="15" height="15" ng-src="{{skill.image}}"/>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="row card-second">
+        <div class="card-date col-xs-9">
+          <strong ng-if="project.work"><i class="fa fa-refresh"></i> Ato Recorrente</strong>
+          <strong ng-if="project.job && project.job.start_date"><i class="fa fa-calendar"></i> {{project.job.start_date | date: 'longDate'}}</strong>
+          <strong ng-if="project.job && !project.job.start_date && project.job.end_date"><i class="fa fa-calendar"></i> {{project.job.end_date | date: 'longDate'}}</strong>
+        </div>
+        <div class="card-volunteer center col-xs-3">
+          <span><i tooltip="Número de voluntários que já se ataram." class="fa fa-user"></i> {{project.volunteers_numbers}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

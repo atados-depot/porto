@@ -1,0 +1,15 @@
+<legend>Causas (selecione uma ou mais)</legend>
+<div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[!causeChosen]">
+  <div class="col-sm-12">
+    <label class="help-block" ng-hide="causeChosen">Escolha pelo menos uma causa para o Ato.</label>
+    <ul class="select-button-list">
+      <li class="col-sm-3 col-xs-4" ng-repeat="cause in all" ng-class="{checked: inSelected(cause)}" ng-show="cause.id != 0">
+      <div class="square center" ng-click="addCause(cause)">
+        <div ng-class="cause.class" class="center"></div>
+        <p>{{cause.name}}</p>
+      </div>
+      <i class="fa fa-check-circle"></i>
+      </li>
+    </ul>
+  </div>
+</div>

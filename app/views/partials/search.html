@@ -1,0 +1,83 @@
+<div class="center explanation" ng-show="landing">
+  <h4>
+    Procure por <span id="atos" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Atos</span> voluntários das suas <span id="ongs" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">ONGs</span> favoritas.
+    <br>
+    <i class="fa fa-hand-o-down"></i>
+  </h4>
+</div>
+
+<div ng-class="{true: 'col-sm-10 col-sm-offset-1', false: 'col-sm-12'}[landing]" id="searchSpace">
+  <button class="btn btn-tab" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Pesquisar Atos</button>
+  <button class="btn btn-tab" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">Pesquisar ONGs</button>
+  <small ng-show="search.showProjects && !landing" class="pull-right"> Mostrando {{search.projects().length}} de {{search.projectCount()}} atos</small>
+  <small ng-hide="search.showProjects || landing" class="pull-right"> Mostrando {{search.nonprofits().length}} de {{search.nonprofitCount()}} ONGs</small>
+  <div class="row filters">
+    <form class="form-inline" role="form">
+      <div class="row col-sm-12" ng-hide="landing" id="search-bar">
+        <div class="form-group col-sm-12">
+          <input id="searchInput" class="form-control" ng-model="search.query" type="text" placeholder="Pesquisar por palavra chave">
+        </div>
+      </div>
+      <div class="col-sm-12" id="second-row">
+        <div class="form-group col-sm-4">
+          <label class="sr-only" for="causesInput">Causa</label>
+          <div class="selectSearch" >
+            <select class="form-control" id="causesInput" ng-model="search.cause" ng-options="c.name for c in causes()">
+              <option value="" disabled selected>Causa</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-sm-4" ng-show="search.showProjects">
+          <label class="sr-only" for="skillsInput">Habilidade</label>
+          <select ng-disabled="!search.showProjects" class="form-control" id="skillInput" ng-model="search.skill" ng-options="s.name for s in skills()">
+            <option value="" disabled selected>Habilidade</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="sr-only" for="citiesInput">Cidade</label>
+          <select class="form-control" id="citiesInput" ng-model="search.city" ng-options="c.name for c in cities() | filter: { active: true }">
+            <option value="" disabled selected>Cidade</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--<button class="btn btn-info" ng-click="showLegend= !showLegend" style="margin-bottom: 15px;">Legenda</button>
+  <div id="legend" class="row" ng-show="showLegend" style="font-size: 10px;margin-bottom: 15px;">
+    <div class="col-sm-6">
+      <h6><strong>Causas</strong></h6>
+      <div ng-repeat="cause in causes()">
+        <img width="16" height="16" ng-src="{{cause.image}}"> {{cause.name}} 
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <h6><strong>Habilidades</strong></h6>
+      <div ng-repeat="skill in skills()">
+        <img width="16" height="16" ng-src="{{skill.image}}"> {{skill.name}} 
+      </div>
+    </div>
+  </div>-->
+
+  <p ng-hide="landing"><small ng-show="search.query || search.city.id > 0 || (search.skill.id > 0 && search.showProjects) || search.cause.id > 0"> Mostrando resultados <span ng-show="search.query">com procura "{{ search.query }}"</span><span ng-show="search.cause.id > 0"><br> com causa "{{ search.cause.name }}"</span><span ng-show="search.skill.id > 0 && search.showProjects"><br> com habilidade "{{ search.skill.name }}"</span><span ng-show="search.city.id > 0"><br> na cidade de "{{ search.city.name }}"</span>.</small></p>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div ng-show="search.showProjects" class="clearfix">
+        <project-card ng-if="landing" ng-repeat="project in search.highlightedProjects()"></project-card>
+        <project-card ng-if="!landing" ng-repeat="project in search.projects()"></project-card>
+        <div class="alert center" ng-show="!search.loading() && !search.projects().length && !landing">Não encontramos projetos para essa busca.</div>
+      </div>
+      <div ng-hide="search.showProjects" class="clearfix">
+        <nonprofit-card ng-if="landing" ng-repeat="nonprofit in search.highlightedNonprofits()"></nonprofit-card>
+        <nonprofit-card ng-if="!landing" ng-repeat="nonprofit in search.nonprofits()"></nonprofit-card>
+        <div class="alert center" ng-show="!search.loading() && !search.nonprofits().length">Não encontramos ONGs para essa busca.</div>
+      </div>
+    </div>
+  </div>
+  <small ng-show="search.showProjects && !landing" class="pull-right"> Mostrando {{search.projects().length}} de {{search.projectCount()}} atos</small>
+  <small ng-hide="search.showProjects || landing" class="pull-right"> Mostrando {{search.nonprofits().length}} de {{search.nonprofitCount()}} ONGs</small>
+  <div id="more-button" class="row center">
+    <a class="btn btn-lg btn-info col-sm-4 col-sm-offset-4" ng-click="getMore()" ui-sref="root.explore">Mostrar mais <span ng-show="search.showProjects">atos</span><span ng-hide="search.showProjects">ONGs</span></a>
+  </div>
+</div>

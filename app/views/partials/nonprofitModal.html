@@ -1,0 +1,42 @@
+<div class="modal-body" ng-controller="LoginCtrl">
+  <form novalidate role="form" name="loginForm" ng-submit="login()">
+    <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[loginForm.email.$error.required || loginForm.email.$invalid]">
+      <input required class="form-control" type='email' name="email" ng-model='email' placeholder="Email">
+      <label class="help-block" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">Email inválido.</label>
+    </div>
+    <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[loginForm.password.$error.required || loginForm.password.$invalid || wrongCredentials]">
+      <input 
+      required
+      class="form-control"
+      type='password'
+      name='password'
+      ng-model='password'
+      ng-minlength="6"
+      placeholder="Senha"/>
+      <div class="help-block" ng-show="loginForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</div>
+      <label class="help-block" ng-show="wrongCredentials">Usuário ou senha estão errados :(</label>
+    </div>
+    <div class="label label-important">{{ error }}</div>
+    <div class="row">
+      <a ng-click="forgotPassword()" id="forgotPasswordLink" class="btn btn-link col-xs-offset-7 col-xs-4">Esqueci minha senha</a>
+    </div>
+    <div class="row">
+      <div class="checkbox col-xs-6">
+        <label>
+          <input type="checkbox" ng-model="remember"> Lembre de mim
+        </label>
+      </div>
+      <button type="submit" ng-disabled="loginForm.$invalid" id="signinButton" class="btn btn-info col-xs-6">Entrar</button>
+    </div>
+    <p style="margin-top: 30px;">Não tem login? <a ng-click="closeNonprofitLoginModal()" ui-sref="root.nonprofitsignup">Cadastre sua ONG</a>!</p>
+  </form> 
+  <form novalidate name="resetPasswordForm" role="form" ng-show="showForgotPassword">
+    <label class="help-block">Digite seu email para receber uma nova senha.</label>
+    <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[resetPasswordForm.forgotEmail.$error.required || resetPasswordForm.forgotEmail.$invalid]">
+      <input required type="email" name="forgotEmail" class="form-control" ng-model='forgotEmail' placeholder="Email"/>
+      <label class="help-block" ng-show="resetPasswordForm.forgotEmail.$dirty && !resetPasswordForm.forgotEmail.alreadyUsed">Email não existe.</label>
+    </div>
+    <button class="btn" ng-disabled="resetPasswordForm.$invalid" ng-click="resetPassword()">Mandar senha</button>
+  </form>
+</div>
+<div class="modal-footer"><contactatados/></div>

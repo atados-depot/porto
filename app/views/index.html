@@ -1,62 +1,89 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-controller="AppCtrl"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" ng-controller="AppCtrl"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" ng-controller="AppCtrl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="portoApp" ng-controller="AppCtrl"> <!--<![endif]-->
   <head>
+    <meta name="fragment" content="!">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
+    <title ng-bind="site.title">Porto Voluntário</title>
+    <meta name="description" content="Atados é uma rede de trabalho voluntário, pessoas e ONGs.">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(app) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
+
+    <link rel="shortcut icon" href="http://www.portovoluntario.com.br/favicon.ico?v=2" />
+
+    <!-- build:css(app) /styles/vendor.css -->
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- build:css({.tmp,app}) /styles/main.css -->
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
+
   </head>
-  <body ng-app="portoVoluntarioApp">
+  <body>
+
     <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <div class="alert">
+        <p class="browsehappy">Você está usando um navegador <strong>antiquado</strong>. Por favor <a href="https://www.google.com/intl/pt/chrome/browser/">atualize seu navegador</a> para melhorar sua experiencia na web.</p>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      </div>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-include="'partials/main'" ng-controller="MainCtrl"></div>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+    <div ui-view=""></div>
 
     <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
+      <script src="/bower_components/es5-shim/es5-shim.js"></script>
+      <script src="/bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js(app) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <!-- endbower -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=pt_BR"></script>
+    <script src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
+
+    <!-- build:js(app) /scripts/vendor.js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="/bower_components/restangular/dist/restangular.min.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/pace/pace.js"></script>
+    <script src="/bower_components/jquery.cookie/jquery.cookie.js"></script>
+    <script src="/jquery.maskedinput.min.js"></script>
+    <script src="/angular-gm.js"></script>
+    <script src="/oms.js"></script>
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/navbar.js"></script>
-        <!-- endbuild -->
-</body>
+
+    <script src="/scripts/constants.js"></script>
+
+    <!-- build:js({.tmp,app}) /scripts/scripts.js -->
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/directives.js"></script>
+    <script src="/scripts/filters.js"></script>
+
+    <script src="/scripts/app/AppCtrl.js"></script>
+    <script src="/scripts/app/Auth.js"></script>
+    <script src="/scripts/app/Cleanup.js"></script>
+    <script src="/scripts/app/Cookies.js"></script>
+    <script src="/scripts/app/HomeCtrl.js"></script>
+    <script src="/scripts/app/LandingCtrl.js"></script>
+    <script src="/scripts/app/LoginCtrl.js"></script>
+    <script src="/scripts/app/Photos.js"></script>
+    <script src="/scripts/app/RootCtrl.js"></script>
+    <script src="/scripts/app/Site.js"></script>
+
+    <script src="/scripts/search/ExplorerCtrl.js"></script>
+    <script src="/scripts/search/Search.js"></script>
+    <script src="/scripts/search/SearchCtrl.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>

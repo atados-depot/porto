@@ -1,0 +1,8 @@
+<div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[form.phone.$error.required || form.phone.$invalid]">
+  <label class="col-sm-3 control-label">Telefone</label>
+  <div class="col-sm-8">
+    <input required type="text" id="phoneInput" class="form-control" name="phone" ng-model="object.phone" ng-minlength="8" ng-maxlength="20" placeholder="Telefone">
+    <label class="help-block" ng-show="form.phone.$error.minlength">Não pode ter menos de 9 caracteres.</label>
+    <label class="help-block" ng-show="form.phone.$error.maxlength">Não pode ter mais de 20 caracteres.</label>
+  </div>
+</div>

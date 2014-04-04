@@ -1,0 +1,85 @@
+<div class="modal-body" ng-controller="VolunteerModalCtrl">
+  <div class="row">
+    <a type="button" class="btn modalTab col-xs-6" ng-class="{active: loginActive}" ng-click="loginActive=true">Log in</a>
+    <a type="button" class="btn modalTab col-xs-6" ng-class="{active: !loginActive}" ng-click="loginActive=false">Criar conta</a>
+  </div>
+
+  <hr>
+
+  <div class="form-group center">
+    <button-facebook class="btn-facebook btn" ng-click="facebookAuth()">
+      <i class="fa fa-facebook"></i> {{facebookState}} com Facebook
+    </button-facebook>
+  </div>
+
+  <hr>
+  <div class="animate-switch-container" ng-switch on="loginActive">
+
+  <div ng-controller="LoginCtrl" ng-switch-when="true">
+    <form novalidate name="loginForm" ng-submit="login()">
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[loginForm.email.$error.required || loginForm.email.$invalid]">
+        <input required class="form-control" type='email' name="email" ng-model='email' placeholder="Email">
+        <label class="help-block" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">Email inválido.</label>
+      </div>
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[loginForm.password.$error.required || loginForm.password.$invalid || wrongCredentials]">
+        <input required
+        class="form-control"
+        type="password"
+        name="password"
+        ng-model="password"
+        ng-minlength="6"
+        placeholder="Senha">
+        <label class="help-block" ng-show="loginForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
+        <label class="help-block" ng-show="wrongCredentials">Usuário ou senha estão errados :(</label>
+      </div>
+      <div class="row">
+        <a ng-click="forgotPassword()" id="forgotPasswordLink" class="btn btn-link col-xs-offset-7 col-xs-4">Esqueci minha senha</a>
+      </div>
+      <div class="row">
+        <div class="checkbox col-xs-6">
+          <label><input type="checkbox" ng-model="remember"> Lembrar de mim</label>
+        </div>
+        <button type="submit" ng-disabled="loginForm.$invalid" id="signinButton" class="btn btn-info col-xs-6">Entrar</button>
+      </div>
+    </form> 
+
+    <form novalidate name="resetPasswordForm" role="form" ng-show="showForgotPassword">
+      <label class="help-block">Digite seu email para receber uma nova senha.</label>
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[resetPasswordForm.forgotEmail.$error.required || resetPasswordForm.forgotEmail.$invalid]">
+        <input required type="forgotEmail" name="forgotEmail" class="form-control" ng-model='forgotEmail' placeholder="Email"/>
+        <label class="help-block" ng-show="resetPasswordForm.forgotEmail.$dirty && !resetPasswordForm.forgotEmail.alreadyUsed">Email não existe.</label>
+      </div>
+      <button class="btn" ng-disabled="resetPasswordForm.forgotEmail.$invalid" ng-click="resetPassword()">Mandar senha</button>
+    </form>
+  </div>
+
+  <div id="volunteer-signup-form" ng-controller="VolunteerSignupCtrl" ng-switch-when="false">
+    <form novalidate name="signupForm" ng-submit="signup()">
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.slug.$error.required || signupForm.slug.$invalid || signupForm.slug.$error.minlength]">
+        <input class="form-control" type='text' name="slug" ng-model='slug' ng-minlength="3" placeholder="Nome de usuário" required/>
+        <label class="help-block" ng-show="signupForm.slug.$error.minlength">Nome de usuário muito curto.</label>
+        <label class="help-block" ng-show="signupForm.slug.hasSpace">Usúario não pode ter espaço.</label>
+        <label class="help-block" ng-show="signupForm.slug.alreadyUsed">Usúario já existe.</label>
+      </div>
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.email.$error.required || signupForm.email.$invalid || signupForm.email.alreadyUsed]">
+        <input class="form-control" type='email' name="email" ng-model='email' placeholder="Email" required>
+        <label class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$invalid"> Email inválido.</label>
+        <label class="help-block" ng-show="signupForm.email.alreadyUsed">Email já existe.</label>
+      </div>
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
+        <input class="form-control" required type='password' name='password' ng-model='password' ng-minlength="6" placeholder="Senha"/>
+      </div>
+      <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
+        <input class="form-control" required type='password' name='passwordConfirm' ng-model='passwordConfirm' ng-minlength="6" placeholder="Confirmar senha"/>
+        <label class="help-block" ng-show="signupForm.password.doesNotMatch">Senhas tem que ser igual</label>
+        <label class="help-block" ng-show="signupForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
+      </div>
+      <div class="row">
+        <button type="submit" class="btn btn-info col-xs-6 col-xs-offset-6" ng-disabled="signupForm.$invalid">Criar conta</button>
+      </div>
+    </form> 
+  </div>
+</div>
+</div>
+
+<div class="modal-footer"><contactatados/></div>

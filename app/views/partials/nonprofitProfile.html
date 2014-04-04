@@ -1,0 +1,88 @@
+<div id="nonprofit-page">
+  <div id="cover">
+    <img alt="{{nonprofit.slug}}" ng-src="{{nonprofit.cover_url}}"/>
+  </div>
+
+  <div id="nonprofit-details" class="row">
+    <div id="left-sidebar" class="col-xs-2">
+      <div id="logo">
+        <img alt="{{nonprofit.slug}}" class="img-responsive" ng-src="{{nonprofit.image_url}}"/>
+      </div>
+
+      <div ezfb-xfbml style="margin-top: 0; width: 200px; height: 120px;">
+        <div class="fb-like-box" 
+          data-href="{{ nonprofit.facebook_page }}"
+          data-width="200" 
+          data-height="120" 
+          data-show-faces="false"
+          data-send="false"></div>
+      </div>
+
+      
+      <div id="nonprofit-map" ng-hide="nonprofit.address.city && nonprofit.address.city === 0">
+        <gm-map
+        gm-map-id="'nonprofitAddressMap'"
+        gm-center="center"
+        gm-zoom="zoom"
+        gm-map-options="options.map"
+        style="width:100%;height:100%">
+          <gm-markers
+          gm-objects="markers"
+          gm-id="object.id"
+          gm-position="{ lat: object.latitude, lng: object.longitude }">
+          </gm-markers>
+        </gm-map>
+      </div>
+      <div id="nonprofit-social">
+        <a ng-if="nonprofit.facebook_page" href="{{nonprofit.facebook_page}}" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a ng-if="nonprofit.google_page" href="{{nonprofit.google_page}}" target="_blank"><i class="fa fa-twitter"></i></a>
+        <a ng-if="nonprofit.twitter_handle" href="{{nonprofit.twitter_handle}}" target="_blank"><i class="fa fa-google-plus"></i></a>
+      </div>
+
+
+      <div id="nonprofit-volunteers"> 
+        <h4 ng-show="nonprofit.volunteers.length > 1">{{nonprofit.volunteers.length}} Voluntários</h4>
+        <h4 ng-show="nonprofit.volunteers.length == 1">{{nonprofit.volunteers.length}} Voluntário</h4>
+        <p ng-show="nonprofit.volunteers.length === 0">Seja o primeiro voluntário da ONG!</p>
+        <div ng-hide="nonprofit.volunteers.length === 0" id="cards"> 
+          <a ui-sref="root.volunteer({slug: volunteer.slug})" target="_blank" ng-repeat="volunteer in nonprofit.volunteers"><img alt="volunteer.slug" width="32" height="32" ng-src="{{volunteer.image_url}}"/></a>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-9 col-sm-8 col-xs-7">
+
+      <h1>{{nonprofit.name}}</h1>
+
+      <button class="btn btn-info pull-right" ng-class="{active: alreadyVolunteer}" ng-show="!loggedUser || loggedUser.role === 'VOLUNTEER'" ng-click="addVolunteerToNonprofit()"><i class="fa fa-heart"></i> Já sou voluntário(a) da ONG</button>
+
+      <p ng-if="nonprofit.website"><i class="fa fa-laptop col-xs-1"></i><a href="{{nonprofit.website}}" target="_blank">{{nonprofit.website}}</a></p>
+      <p ng-if="nonprofit.user.email"><i class="fa fa-inbox col-xs-1"></i><a href="mailto:{{nonprofit.user.email}}" target="_blank">{{nonprofit.user.email}}</a></p>
+      <p ng-if="nonprofit.user.phone"><i class="fa fa-phone col-xs-1"></i>{{nonprofit.user.phone}}</p>
+      <p ng-if="nonprofit.address"><i class="fa fa-map-marker col-xs-1"></i>{{nonprofit.address | as_location_string}}</p>
+
+      <div id="nonprofit-causes">
+        <div class="img-circle cause-image" ng-repeat="cause in nonprofit.causes"> 
+          <img tooltip="{{cause.name}}" width="20" height="20" ng-src="{{cause.image}}"/>
+        </div>
+      </div>
+
+      <h3>Sobre</h3>
+
+      <div ng-bind-html="nonprofit.details | noHTML | newlines"></div>
+
+      <div class="projectButtons">
+        <a type="button" class="btn btn-large buttonTab" ng-class="{active: activeProjects}" ng-click="activeProjects=true">Atos Abertos</a>
+        <a type="button" class="btn btn-large buttonTab" ng-class="{active: !activeProjects}" ng-click="activeProjects=false">Atos Encerrados</a>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 projects">
+          <project-card ng-repeat="project in getProjects()"></project-card>
+          <div class="alert center" ng-show="!getProjects().length">ONG não tem atos nessa categoria.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="card-outer" ng-class="{true: 'col-lg-3 col-md-4 col-sm-5 col-xs-6',  false: 'col-lg-4 col-md-5 col-sm-6'}[landing]" ng-mouseenter="selectMarker(null, nonprofit)" ng-mouseleave="removeMarker(null, nonprofit)" itemscope>
+  <div class="card" id="card-{{nonprofit.slug}}">
+    <div class="card-img">
+      <div class="card-description"> 
+        <a ui-sref="root.nonprofit({slug: nonprofit.slug})">
+          <p>{{nonprofit.description}}</p>
+        </a>
+      </div>
+      <img alt="{{nonprofit.slug}}" class="nonprofitImg" ng-src="{{ nonprofit.image_url }}">
+    </div>
+    <div class="card-footer clearfix">
+      <div class="row card-quick-info">
+        <a ui-sref="root.nonprofit({slug: nonprofit.slug})" class="nonprofit-img">
+          <img alt="{{nonprofit.slug}}" ui-sref="root.nonprofit({slug: nonprofit.slug})" ng-src="{{ nonprofit.image_url }}">
+        </a>
+        <span>
+          <a ui-sref="root.nonprofit({slug: nonprofit.slug})"><p class="nonprofit-name"><strong>{{nonprofit.name}}</strong></p></a>
+          <p class="card-local"><i class="fa fa-map-marker"></i> {{ nonprofit.address.city_state }}</p>
+          <div class="card-icons">
+            <div class="img-circle icon-image" ng-repeat="cause in nonprofit.causes"> 
+              <img alt="{{cause.name}}" tooltip="{{cause.name}}" width="15" height="15" ng-src="{{cause.image}}"/>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="row card-second">
+        <div class="card-volunteer center col-xs-offset-9 col-xs-3">
+          <span><i tooltip="Número de voluntários que já se ataram." class="fa fa-user"></i> {{nonprofit.volunteers_numbers}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

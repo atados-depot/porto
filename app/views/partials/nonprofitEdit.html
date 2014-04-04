@@ -1,0 +1,148 @@
+<div id="nonprofit-edit">
+  <form novalidate class="form-horizontal" id="nonprofit-edit-form" name="nonprofitForm">
+    <div id="nonprofit-page">
+      <div  id="cover">
+        <img alt="{{nonprofit.slug}}" ng-src="{{nonprofit.cover_url}}"/>
+        <div >
+          <label class="btn cover-edit" for="cover-input"><i class="fa fa-edit"></i>Editar foto</label>
+          <input class="form-control" id="cover-input" type="file" name="file" onchange="angular.element(this).scope().uploadCoverFile(this.files)"/>
+        </div>
+      </div>
+
+      <div id="nonprofit-details" class="row">
+
+        <div id="left-sidebar" class="col-xs-2">
+          <div id="logo" >
+            <img alt="{{nonprofit.slug}}" class="img-responsive" ng-src="{{nonprofit.image_url}}"/>
+
+            <button ng-click="save(nonprofit)" ng-disabled="nonprofitForm.$invalid" class="btn btn-info" id="save-button" >Salvar Perfil</button>
+
+            <div >
+              <label class="btn photo-edit" for="image-input"><i class="fa fa-edit"></i>Editar foto</label>
+              <input class="form-control" id="image-input" type="file" name="file" onchange="angular.element(this).scope().uploadProfileFile(this.files)"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <div  class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.name.$error.required || nonprofitForm.name.$invalid]">
+                <label class="col-sm-3 control-label">Nome da ONG</label>
+                <div class="col-sm-8">
+                  <input required type="text" class="form-control" name="name" ng-model="nonprofit.name" ng-minlength="3" ng-maxlength="50" placeholder="Nome da ONG">
+                  <label class="help-block" ng-show="nonprofitForm.name.$error.minlength">Não pode ter menos de 3 caracteres.</label>
+                  <label class="help-block" ng-show="nonprofitForm.name.$error.maxlength">Não pode ter mais de 50 caracteres.</label>
+                </div>
+              </div>
+
+              <div  class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.website.$error.required || nonprofitForm.website.$invalid]">
+                <label class="col-sm-3 control-label">Website</label>
+                <div class="col-sm-8">
+                  <input type="text" name="website" ng-model="nonprofit.website" class="form-control" placeholder="wwww.ong.com.br">
+                </div>
+              </div>
+
+              <div  class="form-group" ng-class="{true: 'has-error',false: 'has-success'}[nonprofitForm.email.$invalid]">
+                <label class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-8">
+                  <input class="form-control" type='email' name="email" ng-model='nonprofit.user.email' placeholder="Email" required>
+                  <label class="help-block" ng-show="nonprofitForm.email.alreadyUsed">Email já é usado</label>
+                </div>
+              </div>
+
+              <phone-input object="nonprofit.user" form="nonprofitForm"></phone-input>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Facebook</label>
+                <div class="col-sm-8 input-group">
+                  <span class="input-group-addon">facebook.com/</span>
+                  <input type="text" name="facebookpage"  ng-model="nonprofit.facebook_page_short" placeholder="ong" class="form-control">
+                </div>
+              </div>
+              <div  class="form-group">
+                <label class="col-sm-3 control-label">Google+</label>
+                <div class="col-sm-8 input-group">
+                  <span class="input-group-addon">plus.google.com/</span>
+                  <input type="text" name="googlePage"  ng-model="nonprofit.google_page_short" placeholder="+ong" class="form-control">
+                </div>
+              </div>
+              <div  class="form-group">
+                <label class="col-sm-3 control-label">Twitter</label>
+                <div class="col-sm-8 input-group">
+                  <span class="input-group-addon">@</span>
+                  <input type="text" name="twitterHandle"  ng-model="nonprofit.twitter_handle_short" placeholder="nome_no_twitter" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <fieldset id="address-fieldset">
+                <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.addressline.$error.required || nonprofitForm.addressline.$invalid]">
+                  <label class="col-sm-3 control-label">Endereço</label>
+                  <div class="col-sm-7">
+                    <input required type="text" class="form-control" name="addressline" ng-model="nonprofit.address.addressline" placeholder="Rua">
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.addressnumber.$error.required || nonprofitForm.addressnumber.$invalid]">
+                  <div class="col-sm-2 col-sm-offset-3" id="addressNumberField">
+                    <input required type="text" class="form-control" name="addressnumber" ng-model="nonprofit.address.addressnumber" placeholder="#">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-7 col-sm-offset-3">
+                    <input type="text" class="form-control" name="addressline2" ng-model="nonprofit.address.addressline2" placeholder="Complemento">
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.neighborhood.$error.required || nonprofitForm.neighborhood.$invalid]">
+                  <div class="col-sm-7 col-sm-offset-3">
+                    <input required type="text" class="form-control" name="neighborhood" ng-model='nonprofit.address.neighborhood' placeholder="Bairro">
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.zipcode.$error.required || nonprofitForm.zipcode.$invalid]">
+                  <div class="col-sm-offset-3 col-sm-5">
+                    <input required type="text" class="form-control" name="zipcode" ng-model='nonprofit.address.zipcode' ng-minlength="8" ng-maxlength="9" placeholder="CEP" id="zipcodeField">
+                  </div>
+                  <label class="help-block" ng-show="nonprofitForm.zipcode.$error.minlength">Não pode ter menos de 8 caracteres.</label>
+                  <label class="help-block" ng-show="nonprofitForm.zipcode.$error.maxlength">Não pode ter mais de 9 caracteres.</label>
+                </div>
+
+                <label class="col-sm-3 control-label">Cidade</label>
+                <div class="btn-group">
+                  <button type="button" class="btn" ng-model="nonprofit.address.city.id" btn-radio="9422">São Paulo, SP</button>
+                  <button type="button" class="btn" ng-model="nonprofit.address.city.id" btn-radio="5915">Curitiba, PR</button>
+                  <button type="button" class="btn" ng-model="nonprofit.address.city.id" btn-radio="1724">Brasília, DF</button>
+                  <button type="button" class="btn" ng-model="nonprofit.address.city.id" btn-radio="6861">Rio de Janeiro, RJ</button>
+                </div>
+
+              </fieldset>
+            </div>
+          </div>
+
+          <fieldset style="margin: 30px;">
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.description.$error.required || nonprofitForm.description.$invalid]">
+              <label class="col-sm-2 control-label">Em poucas palavras</label>
+              <div class="col-sm-7">
+                <textarea class="form-control" required rows="3" name="description" ng-model='nonprofit.description' ng-minlength="10" ng-maxlength="160" placeholder="Pequena descrição"></textarea>
+                <label class="help-block" ng-show="nonprofitForm.description.$error.minlength">Não pode ter menos de 10 caracteres.</label>
+                <label class="help-block" ng-show="nonprofitForm.description.$error.maxlength">Não pode ter mais de 160 caracteres.</label>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[nonprofitForm.details.$error.required || nonprofitForm.details.$invalid]">
+              <label class="col-sm-2 control-label">Detalhe</label>
+              <div class="col-sm-7">
+                <textarea class="form-control" rows="5" name="details" ng-model='nonprofit.details' ng-minlength="10" ng-maxlength="1024" placeholder="Descrição em detalhe"></textarea>
+                <label class="help-block" ng-show="nonprofitForm.details.$error.minlength">Não pode ter menos de 10 caracteres.</label>
+                <label class="help-block" ng-show="nonprofitForm.details.$error.maxlength">Não pode ter menos de 1024 caracteres.</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <causes selected="nonprofit.causes" all="causes()"></causes>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
