@@ -65,8 +65,8 @@ $jumbotron-heading-color:white;
 $jumbotron-bg:rgba(0,0,0,0.4);
 
 $footer-bg:#222222;
-$footer-height:330px;
-$footer-xs-height:550px;
+$footer-height:140px;
+$footer-xs-height:140px;
 $footer-color-heading: $white;
 $footer-color:$white;
 
@@ -798,11 +798,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .navbar-brand {
-  background:$atados-sprite no-repeat;
-  background-position: -1.986114501953125px -99.982666015625px;
-  width: 136px;
-  height: 44px;
-  margin: 5px 15px 5px 40px;
+  background: url('https://s3-sa-east-1.amazonaws.com/atadosapp/images/porto-logo.png');
+  width: 108px;
+  height: 61px;
   text-indent:-999em;
 }
 
@@ -961,11 +959,19 @@ a:focus {
   background-color: #efefef;
   padding: 20px 0;
   box-shadow: 0 2px 10px #888888;
-  .explanation {
+  #landing-call {
     padding: 10px;
+    h1 {
+      color: #1AAEEF;
+      font-size: 60px;
+    }
+    h3 {
+      color: black;
+      font-size: 31px;
+      margin: 50px 0;
+    }
     h4 {
-      color: #999;
-      font-weight:bold;
+      color: #1AAEEF;
       font-size: 30px;
       text-shadow: 1px 0 1px rgba(0,0,0,0.2);
       #atos {

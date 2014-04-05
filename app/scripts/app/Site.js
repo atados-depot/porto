@@ -14,8 +14,8 @@ app.factory('Site', function(Restangular, $http, storage, api) {
   };
 
   return {
-    name : 'Atados - Juntando Gente Boa',
-    title: 'Atados - Juntando Gente Boa',
+    name : 'Porto Voluntário',
+    title: 'Porto Voluntário',
     contactEmail: 'contato@atados.com.br',
     copyright: 'Atados, ' + (new Date()).getFullYear(),
     team: [{

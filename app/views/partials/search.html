@@ -1,19 +1,27 @@
-<div class="center explanation" ng-show="landing">
-  <h4>
-    Procure por <span id="atos" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Atos</span> voluntários das suas <span id="ongs" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">ONGs</span> favoritas.
-    <br>
-    <i class="fa fa-hand-o-down"></i>
+<div id="landing-call" class="container" ng-show="landing">
+  <div class="row">
+    <div class="col-md-6">
+      <img class="img-responsive" alt="Foto chamariz do site Porto Voluntário." ng-src="{{storage}}porto-landing.png">
+    </div>
+    <div class="col-md-6">
+      <h1>Bem-vindos ao <strong>Porto Voluntário!</strong></h1>
+      <h3><strong>Cadastre-se</strong> e encontre aqui diversas oportunidades de trabalho voluntário.</h3>
+      <button type="button" ng-show="!loggedUser" class="btn btn-primary btn-lg btn-block" role="button" ng-click="openLogin('volunteer')">Quero ser voluntário</button>
+    </div>
+  </div>
+  <h4 class="center" style="margin: 142px 0 50px 0;">
+    Veja abaixo alguns <strong>atos</strong> que separamos <strong>especialmente</strong> para você!
   </h4>
 </div>
 
 <div ng-class="{true: 'col-sm-10 col-sm-offset-1', false: 'col-sm-12'}[landing]" id="searchSpace">
-  <button class="btn btn-tab" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Pesquisar Atos</button>
-  <button class="btn btn-tab" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">Pesquisar ONGs</button>
+  <button class="btn btn-tab" ng-hide="landing" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Pesquisar Atos</button>
+  <button class="btn btn-tab" ng-hide="landing" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">Pesquisar ONGs</button>
   <small ng-show="search.showProjects && !landing" class="pull-right"> Mostrando {{search.projects().length}} de {{search.projectCount()}} atos</small>
   <small ng-hide="search.showProjects || landing" class="pull-right"> Mostrando {{search.nonprofits().length}} de {{search.nonprofitCount()}} ONGs</small>
-  <div class="row filters">
+  <div class="row filters" ng-hide="landing">
     <form class="form-inline" role="form">
-      <div class="row col-sm-12" ng-hide="landing" id="search-bar">
+      <div class="row col-sm-12" id="search-bar">
         <div class="form-group col-sm-12">
           <input id="searchInput" class="form-control" ng-model="search.query" type="text" placeholder="Pesquisar por palavra chave">
         </div>
@@ -42,22 +50,6 @@
       </div>
     </form>
   </div>
-
-  <!--<button class="btn btn-info" ng-click="showLegend= !showLegend" style="margin-bottom: 15px;">Legenda</button>
-  <div id="legend" class="row" ng-show="showLegend" style="font-size: 10px;margin-bottom: 15px;">
-    <div class="col-sm-6">
-      <h6><strong>Causas</strong></h6>
-      <div ng-repeat="cause in causes()">
-        <img width="16" height="16" ng-src="{{cause.image}}"> {{cause.name}} 
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <h6><strong>Habilidades</strong></h6>
-      <div ng-repeat="skill in skills()">
-        <img width="16" height="16" ng-src="{{skill.image}}"> {{skill.name}} 
-      </div>
-    </div>
-  </div>-->
 
   <p ng-hide="landing"><small ng-show="search.query || search.city.id > 0 || (search.skill.id > 0 && search.showProjects) || search.cause.id > 0"> Mostrando resultados <span ng-show="search.query">com procura "{{ search.query }}"</span><span ng-show="search.cause.id > 0"><br> com causa "{{ search.cause.name }}"</span><span ng-show="search.skill.id > 0 && search.showProjects"><br> com habilidade "{{ search.skill.name }}"</span><span ng-show="search.city.id > 0"><br> na cidade de "{{ search.city.name }}"</span>.</small></p>
 

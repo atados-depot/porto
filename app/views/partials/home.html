@@ -1,88 +1,12 @@
 <div class="home" ng-controller="LandingCtrl">
-  <div class="row" background-img="{{storage}}landing_cover.jpg" ng-hide="loggedUser">
-    <div class="jumbotron">
-      <div class="col-sm-10 col-sm-offset-1">
-        <h1 class="text-center">Uma rede do bem, para fazer o bem!</h1>
-        <p class="text-center"><b>Cadastre-se</b> e encontre aqui no <b>Atados</b> o trabalho voluntário que procura.</p>
-      </div>
-      <div class="buttons center">
-        <button type="button" ng-show="!loggedUser" class="btn btn-primary btn-lg" role="button" ng-click="openLogin('volunteer')">Quero ser voluntário</button>
-        <button type="button" ng-show="!loggedUser" class="btn btn-info btn-lg" role="button" ng-click="openLogin('nonprofit')">Sou uma ONG</button>
-      </div>
-    </div> <!-- End of Jumbotron -->
-  </div>
-
   <div class="row atados-explorer">
     <atados-search></atados-search>
   </div>
 
   <div id="landing-info">
     <div class="container">
-      <h3>é fácil começar !</h3>
-      <div id="numbers" class="row">
-        <div class="col-sm-4 col-xs-12">
-          <div class="number-outer center">
-            <span class="number"><i class="fa fa-rocket"></i> {{ numbers().projects | number }}</span>
-            <br>
-            <span class="number-label">Oportunidades para agir</span>
-          </div>
-        </div>
-        <div class="col-sm-4 col-xs-12">
-          <div class="number-outer center">
-            <span class="number"><i class="fa fa-smile-o"></i> {{numbers().volunteers |  number}}</span>
-            <br>
-            <span class="number-label">Pessoas que acreditam na mudança</span>
-          </div>
-        </div>
-        <div class="col-sm-4 col-xs-12">
-          <div class="number-outer center">
-            <span class="number">
-              <i class="fa fa-home"></i>
-              {{numbers().nonprofits | number}}</span>
-            <br>
-            <span class="number-label">ONGs para ajudar</span>
-          </div>
-        </div>
-      </div>
       <div id="depoimentos" class="row">
         <depoimento ng-repeat="depoimento in depoimentos"></depoimento>
-      </div>
-    </div>
-  </div>
-
-  <div id="parceirosMidia" class="row">
-    <div class="container">
-      <div id="midia" class="row">
-        <h3><i class="fa fa-globe fa-3"></i> O que falaram de nós?</h3>
-        <img alt="Linha de separação" ng-src="{{storage}}linha-midia.png" style="margin-bottom: 44px; margin-top: -25px;">
-        <ul>
-          <li>
-            <a class="img-responsive" href="http://imaginanacopa.com.br/historias/historia-11-atados/"><img width="100" ng-src="{{storage}}imagina-logo.png" alt="Logo do Imagina na Copa."></a>
-          </li>
-          <li>
-            <a class="img-responsive" href="http://revistatrip.uol.com.br/transformadores/blogs/triptransformadores/2013/06/19/criando-lacos.html"><img ng-src="{{storage}}trip-logo.png" alt="Logo da Trip Transformadora."></a>
-          </li>
-          <li>
-            <a class="img-responsive" href="http://exame.abril.com.br/tecnologia/noticias/rede-social-atados-estimula-voluntariado-em-sao-paulo"><img ng-src="{{storage}}exame-logo.png" alt="Logo da revista Exame."></a>
-          </li>
-          <li>
-            <a class="img-responsive" href="http://revistagalileu.globo.com/Revista/Common/0,,EMI334558-17770,00-CONHECA+O+ATADOS+A+UNICA+REDE+VERDADEIRAMENTE+SOCIAL+DO+BRASIL.html"><img ng-src="{{storage}}galileu-logo.png" alt="Logo da revista Galileu."></a>
-          </li>
-          <li>
-            <a class="img-responsive" href="http://veja.abril.com.br/blog/rodrigo-constantino/economia/de-maos-atadas-e-a-espera-de-um-milagre/"><img ng-src="{{storage}}vejasp-logo.png" alt="Logo da revista Veja."></a>
-          </li>
-          <li>
-            <a class="img-responsive" href="http://www1.folha.uol.com.br/empreendedorsocial/minhahistoria/1246358-acreditamos-que-mudancas-muito-positivas-podem-ocorrer-por-meio-do-voluntariado.shtml"><img ng-src="{{storage}}folhadesp-logo.png" alt="Logo da revista Folha."></a>
-          </li>
-        </ul>
-      </div>
-      <div id="parceiros" class="center row" style="margin: 60px 0;">
-        <h3><i class="fa fa-heart fa-3"></i> Nossos parceiros</h3>
-        <div class="row">
-          <a id="fundacao" class="col-sm-5" href="http://www.fenomenos.org/" target="_blank"><img class="center img-responsive" ng-src="{{storage}}fundacao-fenomenos.png" alt="Logo da Fundação Fenomenos."></a>
-          <a id="allin" class="col-sm-3" href="http://www.allinmail.com.br/" target="_blank"><img class="center img-responsive" ng-src="{{storage}}allin.png" alt="Logo da Empresa All in de envio de email."></a>
-          <a id="handson" class="col-sm-3" href="http://www.handsonnetwork.org/" target="_blank"><img class="center img-responsive" ng-src="{{storage}}hands-on-network.png" alt="Logo da Hands On Network"></a>
-        </div>
       </div>
     </div>
   </div>
