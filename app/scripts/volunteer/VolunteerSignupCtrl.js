@@ -2,7 +2,7 @@
 
 /* global toastr: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.controller('VolunteerSignupCtrl', function($scope, $rootScope, Auth) {
 
@@ -32,18 +32,7 @@ app.controller('VolunteerSignupCtrl', function($scope, $rootScope, Auth) {
       $scope.signupForm.slug.$invalid = false;
     }
   });
-
-  $scope.$watch('email', function (value) {
-    if (value) {
-      Auth.isEmailUsed(value, function (response) {
-        $scope.signupForm.email.alreadyUsed = response.alreadyUsed;
-        $scope.signupForm.email.$invalid = response.alreadyUsed;
-      });
-    } else {
-      $scope.signupForm.email.alreadyUsed = false;
-    }
-  });
-
+  
   $scope.$watch('password + passwordConfirm', function() {
     $scope.passwordDoesNotMatch = $scope.password !== $scope.passwordConfirm;
   });

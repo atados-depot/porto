@@ -32,19 +32,9 @@ app.controller('AppCtrl', function($scope, $rootScope, $modal, $state, $location
     Search.filter(Search.query, Search.cause.id, Search.skill.id, Search.city.id);
   };
 
-  $scope.openLogin = function(type) {
-
+  $scope.openLogin = function() {
     $rootScope.modalInstance = $modal.open({
-      templateUrl: '/partials/loginModal.html',
-      controller: ['$scope', function ($scope) {
-        if (type === 'volunteer') {
-          $scope.volunteerActive = true;
-        } else if (type === 'nonprofit') {
-          $scope.volunteerActive = false;
-        } else {
-          $scope.volunteerActive = true;
-        }
-      }]
+      templateUrl: '/partials/loginModal.html'
     });
   };
 

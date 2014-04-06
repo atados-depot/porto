@@ -4,37 +4,6 @@
 
 var app = angular.module('portoApp');
 
-app.directive('removerole', function() {
-  return {
-    restrict: 'E',
-    template: '<button type="destroy" ng-click="removeRole(role, "work")"><i class="fa fa-trash-o"></i></button>'
-  };
-});
-
-app.directive('button', function() {
-  return {
-    restrict: 'E',
-    compile: function(element, attrs) {
-      if ( attrs.type === 'submit') {
-        element.addClass('btn-primary');
-      } else if ( attrs.type === 'destroy' ) {
-        element.addClass('destroy');
-      } else if ( attrs.type ) {
-        element.addClass('btn-' + attrs.type);
-      }
-      if ( attrs.size ) {
-        element.addClass('btn-' + attrs.size);
-      }
-    }
-  };
-});
-
-app.directive('button-facebook', function() {
-  return {
-    restrict: 'E'
-  };
-});
-
 app.directive('projectCard', function() {
   return {
     restrict: 'E',
@@ -91,6 +60,42 @@ app.directive('phoneInput', function () {
     },
   };
 });
+
+function validPortoSeguroEmail(email) {
+  return email.indexOf('@portoseguro.com.br') >= 0;
+}
+
+app.directive('portoSeguroEmailInput', ['Auth', function(Auth){
+  return {
+    restrict: 'E',
+    scope: {
+      object: '=',
+      form: '=',
+      signup: '='
+    },
+    templateUrl: '/partials/portoSeguroEmailInput.html',
+    link: function(scope) {
+      scope.$watch('object', function (value) {
+        if (value) {
+          scope.form.email.notPortoSeguroEmail = !validPortoSeguroEmail(value);
+          Auth.isEmailUsed(value, function (response) {
+            scope.form.email.$invalid = scope.form.email.alreadyUsed =
+              response.alreadyUsed;
+            if (!scope.signup) {
+              scope.form.email.alreadyUsed = false;
+            }
+            if (scope.form.email.notPortoSeguroEmail) {
+              scope.form.email.$invalid = true;
+            }
+          });
+        } else {
+          scope.form.email.alreadyUsed = false;
+          scope.form.email.$invalid = true;
+        }
+      });
+    }
+  };
+}]);
 
 app.directive('causes', function () {
   return {
@@ -166,32 +171,6 @@ app.directive('email', function () {
       email: '@'
     },
     template: '<p><i class="fa fa-laptop"></i> {{email}}</p>'
-  };
-});
-
-app.directive('contactatados', function() {
-  return {
-    restrict: 'E',
-    scope: {},
-    template: '<p>Entre em contato clicando abaixo no canto direito se estiver tendo problemas.</p>'
-  };
-});
-
-app.directive('doubtAtados', function() {
-  return {
-    restrict: 'E',
-    scope: {},
-    template: '<p>Entre em contato clicando abaixo no canto direito se estiver com dúvidas.</p>'
-  };
-});
-
-app.directive('backgroundImg', function () {
-  return function (scope, element, attrs) {
-    var url = attrs.backgroundImg;
-    element.css({
-      'background-image': 'url(' + url + ')',
-      'background-size': 'cover'
-    });
   };
 });
 
