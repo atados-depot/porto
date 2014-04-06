@@ -753,6 +753,13 @@ h1, h2, h3, h4, h5, h6,
   }
   
   .navbar-btn {
+    &:hover {
+      color: white;
+      background-color: #304852;
+    }
+    width: 145px;
+    background-color: #0081B2;
+    color: white;
     text-transform:uppercase;
   }
 }
@@ -968,7 +975,8 @@ a:focus {
     h3 {
       color: black;
       font-size: 31px;
-      margin: 50px 0;
+      margin: 35px 0;
+      line-height: 50px;
     }
     h4 {
       color: #1AAEEF;
