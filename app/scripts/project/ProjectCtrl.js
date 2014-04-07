@@ -3,7 +3,7 @@
 /* global toastr: false */
 /* global google: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.controller('ProjectCtrl', function($scope, $rootScope, $state, $stateParams, $http, Auth, $modal, Volunteer, project, api, VOLUNTEER) {
 

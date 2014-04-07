@@ -13,6 +13,7 @@
 
 // Where the logo is
 $atados-sprite:url("https://s3-sa-east-1.amazonaws.com/atadosapp/images/atados-sprite.png");
+$porto-sprite:url("https://s3-sa-east-1.amazonaws.com/atadosapp/images/porto-sprite.png");
 $arrow-down:url("https://s3-sa-east-1.amazonaws.com/atadosapp/images/arrow-down.png");
 
 // Atados Bootstrap Theme
@@ -59,6 +60,7 @@ $btn-primary-border:darken($orange-dark, 5%);
 
 $navbar-border-radius:0px;
 $navbar-margin-bottom:0px;
+$navbar-height:76px;
 
 $jumbotron-color:white;
 $jumbotron-heading-color:white;
@@ -805,9 +807,12 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .navbar-brand {
-  background: url('https://s3-sa-east-1.amazonaws.com/atadosapp/images/porto-logo.png');
-  width: 108px;
-  height: 61px;
+  background: $porto-sprite;
+  background-position: 0 0;
+  width: 98px;
+  height: 51px;
+  margin-top: 12px;
+  margin-right: 20px;
   text-indent:-999em;
 }
 
@@ -1574,6 +1579,36 @@ $card-img-height: 170px;
 
 .toast-info {
   background-color: $orange;
+}
+
+.portoLogo, .atadosLogo, .portoVoluntarioLogo{
+  background: $porto-sprite no-repeat;
+}
+
+.atadosLogo {
+  background-position: -190.9479217529297px 0;
+  width: 111px;
+  height: 43px;
+  text-indent:-999em;
+  position: absolute;
+  margin-left: 118px;
+  margin-top: 25px;
+}
+
+.portoLogo {
+  background-position: -106.94792175292969px 0;
+  width: 73px;
+  height: 97px;
+  text-indent:-999em;
+  position: absolute;
+  margin: 0 20px;
+}
+
+.portoVoluntarioLogo {
+  background-position: 0 0;
+  width: 98px;
+  height: 51px;
+  text-indent:-999em;
 }
 
 .skill_1, .skill_2, .skill_3, .skill_4, .skill_5, .skill_6, .skill_7, .skill_8, .skill_9, .skill_10, .skill_11, .skill_12, .cause_1, .cause_2, .cause_3, .cause_4, .cause_5, .cause_6, .cause_7, .cause_8, .cause_9, .cause_10, .cause_11, .cause_12, .cause_13{

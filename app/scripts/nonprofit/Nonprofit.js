@@ -2,7 +2,7 @@
 
 /* global toastr: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.factory('Nonprofit', function(Restangular, $state, $stateParams, Cleanup, $http, api) {
   return {

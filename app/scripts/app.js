@@ -43,6 +43,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/explore',
       templateUrl: '/partials/explore.html',
       controller: 'ExplorerCtrl'
+    })
+    .state('root.nonprofit', {
+      url: '/ong/:slug',
+      templateUrl: '/partials/nonprofitProfile.html',
+      controller: 'NonprofitCtrl',
+      resolve: {
+        nonprofit: ['Nonprofit', '$stateParams', function (Nonprofit, $stateParams) {
+          return Nonprofit.get($stateParams.slug);
+        }]
+      }
     });
 
   $urlRouterProvider.otherwise('/ops');

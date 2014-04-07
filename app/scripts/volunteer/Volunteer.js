@@ -2,7 +2,7 @@
 
 /* global toastr: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.factory('Volunteer', function($http, $state, Restangular, Cleanup, api) {
   return {

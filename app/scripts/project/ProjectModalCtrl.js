@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.controller('ProjectModalCtrl', function ($scope, $modalInstance, nonprofit, phone, name) {
   $scope.nonprofit = nonprofit;

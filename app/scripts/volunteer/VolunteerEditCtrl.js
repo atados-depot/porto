@@ -2,7 +2,7 @@
 
 /* global toastr: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.controller('VolunteerEditCtrl', function($scope, $filter, Auth, Photos, Volunteer, $http, Restangular, $state, Site, api, VOLUNTEER) {
 

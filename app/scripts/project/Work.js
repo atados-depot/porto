@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.factory('Work', function($http, $q, api) {
   return {

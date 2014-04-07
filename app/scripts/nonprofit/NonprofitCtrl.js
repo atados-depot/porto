@@ -3,7 +3,7 @@
 /* global toastr: false */
 /* global google: false */
 
-var app = angular.module('atadosApp');
+var app = angular.module('portoApp');
 
 app.controller('NonprofitCtrl', function($scope, $rootScope, $state, $http, nonprofit, api, VOLUNTEER) {
 
