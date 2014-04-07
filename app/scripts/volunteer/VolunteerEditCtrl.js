@@ -93,18 +93,6 @@ app.controller('VolunteerEditCtrl', function($scope, $filter, Auth, Photos, Volu
     }
   });
 
-  $scope.getFacebookPhoto = function () {
-    if ($scope.volunteer.facebook_uid) {
-      Photos.getFacebookPhoto(function (response) {
-        toastr.success('Foto do facebook salva com sucesso');
-        $scope.volunteer.image_url = response;
-      }, function (error) {
-        console.error(error);
-        toastr.error('Error no servidor. Não consigo pegar foto do Facebook.');
-      });
-    }
-  };
-
   $scope.$watch('password + passwordConfirm', function() {
     $scope.volunteerEditForm.password.doesNotMatch = $scope.password !== $scope.passwordConfirm;
     $scope.volunteerEditForm.password.$invalid = $scope.volunteerEditForm.password.doesNotMatch;

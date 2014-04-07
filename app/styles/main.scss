@@ -1171,7 +1171,11 @@ a:focus {
 }
 
 #volunteer-edit {
-  margin: 50px 0;
+  background-color: #ECECEC;
+  h1 {
+    color: #0094D3
+  }
+
   #img-edit {
     input {
       display: none;

@@ -50,6 +50,21 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
           return Nonprofit.get($stateParams.slug);
         }]
       }
+    })
+    .state('root.volunteer', {
+      url: '/voluntario/:slug',
+      templateUrl: '/partials/volunteerProfile.html',
+      controller: 'VolunteerCtrl',
+      resolve: {
+        volunteer: ['Volunteer', '$stateParams', function (Volunteer, $stateParams) {
+          return Volunteer.get($stateParams.slug);
+        }]
+      }
+    })
+    .state('root.volunteeredit', {
+      url: '/editar/voluntario',
+      templateUrl: '/partials/volunteerEdit.html',
+      controller: 'VolunteerEditCtrl'
     });
 
   $urlRouterProvider.otherwise('/ops');

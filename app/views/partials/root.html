@@ -25,7 +25,7 @@
       <form class="navbar-form navbar-right" ng-show="loggedUser" style="margin: 0;">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ loggedUser.slug }}<span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ loggedUser.slug }}<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a ui-sref="root.volunteer({slug: loggedUser.slug})">Meu perfil</a></li>
               <li><a ui-sref="root.volunteeredit">Editar perfil</a></li>
