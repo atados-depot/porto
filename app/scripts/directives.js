@@ -75,22 +75,18 @@ app.directive('portoSeguroEmailInput', ['Auth', function(Auth){
     },
     templateUrl: '/partials/portoSeguroEmailInput.html',
     link: function(scope) {
+      window.form  = scope.form;
       scope.$watch('object', function (value) {
         if (value) {
-          scope.form.email.notPortoSeguroEmail = !validPortoSeguroEmail(value);
+          scope.form.email.$setValidity('notPortoSeguroEmail', validPortoSeguroEmail(value));
           Auth.isEmailUsed(value, function (response) {
-            scope.form.email.$invalid = scope.form.email.alreadyUsed =
-              response.alreadyUsed;
+            scope.form.email.$setValidity('alreadyUsed', !response.alreadyUsed);
             if (!scope.signup) {
-              scope.form.email.alreadyUsed = false;
-            }
-            if (scope.form.email.notPortoSeguroEmail) {
-              scope.form.email.$invalid = true;
+              scope.form.email.$setValidity('alreadyUsed', true);
             }
           });
         } else {
-          scope.form.email.alreadyUsed = false;
-          scope.form.email.$invalid = true;
+          scope.form.email.$setValidity('alreadyUsed', true);
         }
       });
     }
