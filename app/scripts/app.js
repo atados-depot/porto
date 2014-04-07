@@ -29,9 +29,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       resolve: {
         projects: ['Search', function(Search) {
           return Search.getHighlightedProjects();
-        }],
-        nonprofit: ['Search', function(Search) {
-          return Search.getHighlightedNonprofits();
         }]
       }
     })

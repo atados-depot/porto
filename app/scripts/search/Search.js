@@ -9,7 +9,6 @@ app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size)
   var _city = {};
   
   var _highlightedProjects = [];
-  var _highlightedNonprofits = [];
 
   var _projects = [];
   var _nonprofits = [];
@@ -161,26 +160,15 @@ app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size)
       return _nonprofits;
     },
     getHighlightedProjects: function () {
-      return Restangular.all('projects').getList({highlighted: true}).then( function(response) {
+      return Restangular.all('porto/highlights').getList().then( function(response) {
         _highlightedProjects = fixProject(response);
         return;
       }, function () {
         console.error('Não consegui pegar os atos em destaque do servidor.');
       });
     },
-    getHighlightedNonprofits: function () {
-      return Restangular.all('nonprofits').getList({highlighted: true}).then( function(response) {
-        _highlightedNonprofits = fixNonprofit(response);
-        return;
-      }, function () {
-        console.error('Não consegui pegar as ONGs em destaque do servidor.');
-      });
-    },
     highlightedProjects: function () {
       return _highlightedProjects;
-    },
-    highlightedNonprofits: function () {
-      return _highlightedNonprofits;
-    },
+    }
   };
 });
