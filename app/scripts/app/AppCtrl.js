@@ -47,4 +47,8 @@ app.controller('AppCtrl', function($scope, $rootScope, $modal, $state, $location
   $rootScope.closeNonprofitLoginModal = function () {
     $rootScope.modalInstance.close();
   };
+
+  $scope.goToExplore = function () {
+    $state.transitionTo('root.explore');
+  };
 });
