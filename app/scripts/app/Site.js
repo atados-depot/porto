@@ -45,7 +45,6 @@ app.factory('Site', function(Restangular, $http, storage, api) {
 
           _causes = response.causes;
           _causes.forEach(function (c) {
-            c.checked = false;
             c.image = storage + 'cause_' + c.id + '.png';
             c.class = 'cause_' + c.id;
           });

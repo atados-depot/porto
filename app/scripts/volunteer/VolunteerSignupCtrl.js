@@ -48,7 +48,7 @@ app.controller('VolunteerSignupCtrl', function($scope, $rootScope, Auth) {
           Auth.login({
             username: $scope.email,
             password: $scope.password,
-            remember: $scope.remember
+            remember: true
           }, function (response) {
             Auth.getCurrentUser(response.access_token).then(
               function (user) {
