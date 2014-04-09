@@ -7,13 +7,13 @@
       <h1 id="volunteer-name">{{volunteer.name}}</h1>
 
       <div class="row" id="volunteer-icons">
-        <div class="col-sm-6" ng-if="volunteer.causes">
+        <div class="col-sm-12" ng-if="volunteer.causes" style="margin-top: 50px;margin-bottom: 25px;">
           <p>Causas</p>
           <div class="img-circle icon-image" ng-repeat="cause in volunteer.causes"> 
             <img alt="{{cause.name}}" tooltip="{{cause.name}}" width="20" height="20" ng-src="{{cause.image}}"/>
           </div>
         </div>
-        <div class="col-sm-6" ng-if="volunteer.skills">
+        <div class="col-sm-12" ng-if="volunteer.skills">
           <p>Habilidades</p>
           <div class="img-circle icon-image" ng-repeat="skill in volunteer.skills"> 
             <img alt="{{skill.name}}" tooltip="{{skill.name}}" width="20" height="20" ng-src="{{skill.image}}"/>

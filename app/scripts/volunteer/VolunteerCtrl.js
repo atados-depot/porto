@@ -5,6 +5,7 @@ var app = angular.module('portoApp');
 app.controller('VolunteerCtrl', function($scope, volunteer) {
 
   $scope.volunteer = volunteer;
+  window.volunteer = $scope.volunteer;
   $scope.landing = false;
   $scope.site.title = 'Voluntário - ' + volunteer.slug;
 
