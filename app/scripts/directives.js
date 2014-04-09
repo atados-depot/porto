@@ -61,6 +61,20 @@ app.directive('phoneInput', function () {
   };
 });
 
+app.directive('neighborhoodInput', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      object: '=object',
+      form: '=form',
+    },
+    templateUrl: '/partials/neighborhoodInput.html',
+    link: function() {
+    },
+  };
+});
+
+
 function validPortoSeguroEmail(email) {
   return email.indexOf('@portoseguro.com.br') >= 0;
 }

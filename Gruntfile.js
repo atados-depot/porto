@@ -20,8 +20,15 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-ng-constant');
 
+  grunt.loadNpmTasks('grunt-githooks');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+    githooks: {
+      all: {
+        'pre-commit': 'build'
+      }
+    },
     ngconstant: {
       // Options for all targets
       options: {
@@ -633,6 +640,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
+    'githooks',
     'build'
   ]);
 };

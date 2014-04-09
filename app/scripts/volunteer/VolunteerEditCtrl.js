@@ -14,12 +14,8 @@ app.controller('VolunteerEditCtrl', function($scope, $filter, Auth, Photos, Volu
   });
 
   if ($scope.loggedUser && $scope.loggedUser.role === VOLUNTEER) {
-    $scope.savedEmail = $scope.loggedUser.user.email;
     $scope.volunteer = $scope.loggedUser;
     window.volunteer = $scope.volunteer;
-  } else {
-    $state.transitionTo('root.home');
-    toastr.error('Voluntário não logado para editar.');
   }
 
   $scope.cityLoaded = false;
@@ -80,18 +76,6 @@ app.controller('VolunteerEditCtrl', function($scope, $filter, Auth, Photos, Volu
       });
     }
   };
-
-  $scope.$watch('volunteer.user.email', function (value, old) {
-    if (value && value !== old && value !== $scope.savedEmail) {
-      Auth.isEmailUsed(value, function (response) {
-        $scope.volunteerEditForm.email.alreadyUsed = response.alreadyUsed;
-        $scope.volunteerEditForm.email.$invalid = response.alreadyUsed;
-      });
-    } else {
-      $scope.volunteerEditForm.email.$invalid = false;
-      $scope.volunteerEditForm.email.alreadyUsed = false;
-    }
-  });
 
   $scope.$watch('password + passwordConfirm', function() {
     $scope.volunteerEditForm.password.doesNotMatch = $scope.password !== $scope.passwordConfirm;

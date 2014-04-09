@@ -1,90 +1,83 @@
 <div id="volunteer-edit">
   <div class="container" class="row">
+
     <div class="page-header">
       <h1 class="form-heading">Editar Perfil</h1>
     </div>
 
     <form novalidate class="form-horizontal" id="volunteerEditForm" name="volunteerEditForm" ng-submit="saveVolunteer()">
 
-      <div id="img-edit" class="col-sm-3">
-        <img alt="{{volunteer.slug}}" class="img-responsive" ng-src="{{volunteer.image_url}}" width="120" height="120"/>
-        <label class="btn btn-info" for="image-input"><i class="fa fa-edit"></i> Editar foto</label>
-        <input class="form-control" id="image-input" type="file" name="file" onchange="angular.element(this).scope().uploadProfileFile(this.files)"/>
+      <div class="row">
+        <div id="img-edit" class="col-sm-2">
+          <img alt="{{volunteer.slug}}" class="img-responsive" ng-src="{{volunteer.image_url}}" width="120" height="120"/>
+          <label class="btn photo-edit" for="image-input"><i class="fa fa-edit"></i> Editar foto</label>
+          <input class="form-control" id="image-input" type="file" name="file" onchange="angular.element(this).scope().uploadProfileFile(this.files)"/>
+        </div>
+
+        <div class="col-sm-5">
+          <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.name.$invalid]">
+            <label class="col-lg-3 control-label" for="name">Nome</label>
+            <div class="col-lg-8">
+              <input class="form-control" ng-minlength="3" ng-maxlength="100" type='text' name="name" ng-model='volunteer.user.name' placeholder="Nome"/>
+              <label class="help-block" ng-show="volunteerEditForm.name.$error.minlength">Não pode ter menos de 3 caracteres.</label>
+              <label class="help-block" ng-show="volunteerEditForm.name.$error.maxlength">Não pode ter mais de 100 caracteres.</label>
+            </div>
+          </div>
+
+          <phone-input object="volunteer.user" form="volunteerEditForm"></phone-input>
+
+          <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.password.$dirty && volunteerEditForm.password.$invalid]">
+            <div class="col-sm-8 col-sm-offset-3">
+              <input class="form-control" type='password' name='password' ng-model='password' ng-minlength="6" placeholder="Senha"/>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.password.$dirty && volunteerEditForm.password.$invalid]">
+            <div class="col-sm-8 col-sm-offset-3">
+              <input class="form-control" type='password' name='passwordConfirm' ng-model='passwordConfirm' ng-minlength="6" placeholder="Confirme senha"/>
+              <label class="help-block" ng-show="volunteerEditForm.password.doesNotMatch">Senhas tem que ser igual!</label>
+              <label class="help-block" ng-show="volunteerEditForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+
+          <div class="row">
+            <label class="col-lg-3 control-label">Nascimento</label>
+            <div class="col-md-8">
+              <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" ng-model="volunteer.birthDate" is-open="opened" min="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Fechar" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+            </div>
+          </div>
+
+          <br>
+
+          <fieldset id="address-fieldset">
+            <div class="form-group">
+              <div class="col-sm-8 col-sm-offset-3">
+                <select class="form-control" ng-model="volunteer.address.state" ng-options="s.name for s in states()">
+                  <option value="" disabled selected>Estado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-8 col-sm-offset-3">
+                <select class="form-control" ng-model="volunteer.address.city" ng-options="c.name for c in stateCities" ng-disabled="!cityLoaded">
+                  <option value="" disabled selected>Cidade</option>
+                </select>
+              </div>
+            </div>
+
+          <neighborhood-input object="volunteer.user.address" form="volunteerEditForm"></neighborhood-input>
+            
+          </fieldset>
+        </div> <!-- end of 2nd column -->
       </div>
 
-      <div class="col-sm-5">
-        <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.name.$invalid]">
-          <label class="col-lg-3 control-label" for="name">Nome</label>
-          <div class="col-lg-8">
-            <input class="form-control" ng-minlength="3" ng-maxlength="100" type='text' name="name" ng-model='volunteer.user.name' placeholder="Nome"/>
-            <label class="help-block" ng-show="volunteerEditForm.name.$error.minlength">Não pode ter menos de 3 caracteres.</label>
-            <label class="help-block" ng-show="volunteerEditForm.name.$error.maxlength">Não pode ter mais de 100 caracteres.</label>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{true: 'has-error',false: 'has-success'}[volunteerEditForm.email.$error.required || volunteerEditForm.email.$invalid]">
-          <label class="col-lg-3 control-label">Email</label>
-          <div class="col-lg-8">                     
-            <input class="form-control" type="email" name="email" ng-model="volunteer.user.email" required/>
-            <label class="help-block" ng-show="volunteerEditForm.email.alreadyUsed">Email já é usado.</label>
-            <label class="help-block" ng-show="volunteerEditForm.email.$invalid && volunteerEditForm.email.$dirty">Email inválido.</label>
-            <label class="help-block" ng-show="volunteerEditForm.email.$error.required">Precisamos do seu email para você se logar.</label>
-          </div>
-        </div>
-        <phone-input object="volunteer.user" form="volunteerEditForm"></phone-input>
-        <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.password.$dirty && volunteerEditForm.password.$invalid]">
-          <div class="col-sm-8 col-sm-offset-3">
-            <input class="form-control" type='password' name='password' ng-model='password' ng-minlength="6" placeholder="Senha"/>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.password.$dirty && volunteerEditForm.password.$invalid]">
-          <div class="col-sm-8 col-sm-offset-3">
-            <input class="form-control" type='password' name='passwordConfirm' ng-model='passwordConfirm' ng-minlength="6" placeholder="Confirme senha"/>
-            <label class="help-block" ng-show="volunteerEditForm.password.doesNotMatch">Senhas tem que ser igual!</label>
-            <label class="help-block" ng-show="volunteerEditForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-
-        <div class="row">
-          <label class="col-lg-3 control-label">Data Nascimento</label>
-          <div class="col-md-8">
-            <p class="input-group">
-            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" ng-model="volunteer.birthDate" is-open="opened" min="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Fechar" />
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
-            </span>
-            </p>
-          </div>
-        </div>
-
-        <br>
-
-        <fieldset id="address-fieldset">
-          <div class="form-group">
-            <div class="col-sm-8 col-sm-offset-3">
-              <select class="form-control" ng-model="volunteer.address.state" ng-options="s.name for s in states()">
-                <option value="" disabled selected>Estado</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-8 col-sm-offset-3">
-              <select class="form-control" ng-model="volunteer.address.city" ng-options="c.name for c in stateCities" ng-disabled="!cityLoaded">
-                <option value="" disabled selected>Cidade</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[volunteerEditForm.neighborhood.$invalid]">
-            <div class="col-sm-8 col-sm-offset-3">
-              <input type="text" class="form-control" name="neighborhood" ng-model='volunteer.address.neighborhood' placeholder="Bairro">
-            </div>
-          </div>
-
-        </fieldset>
-      </div> <!-- end of 2nd column -->
-      <div class="col-sm-12">
-
+      <div class="row">
         <fieldset class="col-sm-6">
           <causes all="causes()" selected="volunteer.causes"></causes>
         </fieldset>
@@ -92,9 +85,9 @@
         <fieldset class="col-sm-6">
           <skills all="skills()" selected="volunteer.skills"></skills>
         </fieldset>
-
-        <button id="save-button" type="submit" class="btn btn-info" ng-disabled="volunteerEditForm.$invalid">Salvar</button>
       </div>
+
+      <button id="save-button" type="submit" class="btn btn-info" ng-disabled="volunteerEditForm.$invalid">Salvar perfil</button>
 
     </form>
   </div>
