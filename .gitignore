@@ -1,7 +1,8 @@
 node_modules
 public
 .tmp
-.swp
+.*.swp
+.*.swo
 .sass-cache
 app/bower_components
 heroku
