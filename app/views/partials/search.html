@@ -1,19 +1,3 @@
-<div id="landing-call" class="container" ng-show="landing">
-  <div class="row">
-    <div class="col-md-6">
-      <img class="img-responsive" alt="Foto chamariz do site Porto Voluntário." ng-src="{{storage}}porto-landing.png">
-    </div>
-    <div class="col-md-6">
-      <h1>Bem-vindos ao <strong>Porto Voluntário!</strong></h1>
-      <h3><strong>Cadastre-se</strong> e encontre aqui diversas oportunidades de trabalho voluntário.</h3>
-      <button type="button" ng-show="!loggedUser" class="btn btn-primary btn-lg btn-block" role="button" ng-click="openLogin('volunteer')">Quero ser voluntário</button>
-    </div>
-  </div>
-  <h4 class="center" style="margin: 142px 0 50px 0;">
-    Veja abaixo alguns <strong>atos</strong> que separamos <strong>especialmente</strong> para você!
-  </h4>
-</div>
-
 <div ng-class="{true: 'col-sm-10 col-sm-offset-1', false: 'col-sm-12'}[landing]" id="searchSpace">
   <button class="btn btn-tab" ng-hide="landing" ng-click="search.showProjects=true" ng-class="{active: search.showProjects}">Pesquisar Atos</button>
   <button class="btn btn-tab" ng-hide="landing" ng-click="search.showProjects=false" ng-class="{active: !search.showProjects}">Pesquisar ONGs</button>

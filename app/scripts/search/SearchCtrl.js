@@ -10,6 +10,7 @@ var app = angular.module('portoApp');
 app.controller('SearchCtrl', function ($scope, $http, $location, $anchorScroll, Search, $state, storage, defaultZoom) {
 
   $scope.search =  Search;
+  window.map = constants.map;
   $scope.map = constants.map;
 
   var alreadySearchedProject = false;

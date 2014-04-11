@@ -3,7 +3,7 @@
 /* global $: false */
 
 var app = angular.module('portoApp',
-    ['restangular', 'ui.router', 'ui.bootstrap', 'atadosConstants']);
+    ['restangular', 'ui.router', 'ui.bootstrap', 'atadosConstants', 'AngularGM']);
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 

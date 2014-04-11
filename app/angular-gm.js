@@ -1466,6 +1466,7 @@
         map.setOptions(config);
       }
 
+      console.log(map);
       constants.map = map;
       return map;
     };
