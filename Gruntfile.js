@@ -20,15 +20,8 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-ng-constant');
 
-  grunt.loadNpmTasks('grunt-githooks');
-
   // Define the configuration for all the tasks
   grunt.initConfig({
-    githooks: {
-      all: {
-        'pre-commit': 'build'
-      }
-    },
     ngconstant: {
       // Options for all targets
       options: {
@@ -284,7 +277,7 @@ module.exports = function (grunt) {
             nodemon.on('config:update', function () {
               setTimeout(function () {
                 require('open')('http://localhost:8080/debug?port=5858');
-              }, 500);              
+              }, 500);
             });
           }
         }
@@ -584,11 +577,12 @@ module.exports = function (grunt) {
       ]);
     }
 
-    else grunt.task.run([
-      'test:server',
-      'test:client'
-    ]);
-  });  
+    else {grunt.task.run([
+        'test:server',
+        'test:client'
+      ]);
+    }
+  });
 
   grunt.registerTask('build', [
     'clean:dist',
@@ -615,7 +609,6 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'githooks',
     'build'
   ]);
 };
