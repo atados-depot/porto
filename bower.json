@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.2.11",
+    "angular": ">=1.2.*",
     "angular-i18n": "~1.2.14",
     "angular-ui-router": "~0.2.8",
     "angular-ui": "~0.4.0",
@@ -30,15 +30,15 @@
     "jquery": "~1.11.0",
     "jquery.cookie": "~1.4.0",
     "sass-bootstrap": "~3.0.2",
-    "angular-resource": "1.2.11",
-    "angular-cookies": "1.2.11",
-    "angular-sanitize": "1.2.11",
+    "angular-resource": ">=1.2.*",
+    "angular-cookies": ">=1.2.*",
+    "angular-sanitize": ">=1.2.*",
     "font-awesome": "~4.0.3",
     "pace": "~0.5.1"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.11",
-    "angular-scenario": "1.2.11"
+    "angular-mocks": ">=1.2.*",
+    "angular-scenario": ">=1.2.*"
   },
   "testPath": "test/client/spec"  
 }
