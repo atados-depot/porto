@@ -5,7 +5,7 @@ var app = angular.module('portoApp');
 app.controller('LandingCtrl', function ($scope, $rootScope) {
 
   $rootScope.explorerView = false;
-  $scope.site.title = 'Atados - Juntando Gente Boa';
+  $scope.site.title = 'Porto Voluntário';
   $scope.landing = true;
 
   $scope.slides = [
