@@ -12,6 +12,3 @@ before_script:
 notifications:
   email:
     - marjori@atados.com.br
-
-after_success:
-  - coveralls
