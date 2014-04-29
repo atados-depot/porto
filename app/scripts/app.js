@@ -61,6 +61,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         }]
       }
     })
+    .state('root.confirmemail', {
+      url: '/confirmar/email/',
+      controller: 'TokenCtrl'
+    })
     .state('root.volunteer', {
       url: '/voluntario/:slug',
       templateUrl: '/partials/volunteerProfile.html',
