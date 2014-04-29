@@ -2,7 +2,7 @@
 
 var app = angular.module('portoApp');
 
-app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size) {
+app.factory('Search', function (Restangular, Cleanup, ENV) {
   var _query = '';
   var _cause = {};
   var _skill = {};
@@ -29,7 +29,7 @@ app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size)
   };
 
   var fixProject = function (projects) {
-    projects.forEach(sanitizeProject);
+    projects.forEach(Cleanup.projectForSearch);
     if (projects._resultmeta) {
       _nextUrlProject = toHttps(projects._resultmeta.next);
       _projectCount = projects._resultmeta.count;
@@ -40,7 +40,7 @@ app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size)
   };
 
   var fixNonprofit = function (nonprofits) {
-    nonprofits.forEach(sanitizeNonprofit);
+    nonprofits.forEach(Cleanup.nonprofitForSearch);
     if (nonprofits._resultmeta) {
       _nextUrlNonprofit = toHttps(nonprofits._resultmeta.next);
       _nonprofitCount = nonprofits._resultmeta.count;
@@ -50,39 +50,9 @@ app.factory('Search', function (Restangular, Site, api, storage, ENV, page_size)
     return nonprofits;
   };
 
-  var sanitizeProject = function (p) {
-    p.causes.forEach(function (c) {
-      c.image = storage + 'cause_' + c.id + '.png';
-      c.class = 'cause_' + c.id;
-    });
-
-    p.skills.forEach(function (s) {
-      s.image = storage + 'skill_' + s.id + '.png';
-      s.class = 'skill_' + s.id;
-    });
-  };
-
-  var sanitizeNonprofit = function (n) {
-    if (Site.causes().length !== 0) {
-      var causes = [];
-      n.causes.forEach(function (c) {
-        var cause = {};
-        cause.id = Site.causes()[c].id;
-        cause.name = Site.causes()[c].name;
-        cause.class = Site.causes()[c].class;
-        cause.image = Site.causes()[c].image;
-        cause.checked = true;
-        causes.push(cause);
-      });
-      n.causes = causes;
-    }
-    n.address = n.user.address;
-  };
-
-  function searchProjects(query, cause, skill, city, pageSize) {
-    pageSize = typeof pageSize !== 'undefined' ? pageSize : page_size;
+  function searchProjects(query, cause, skill, city) {
     var urlHeaders = {
-      page_size: pageSize,
+      page_size: 20,
       query: query,
       cause: cause,
       skill: skill,

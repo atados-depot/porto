@@ -1270,6 +1270,9 @@ $card-img-height: 170px;
       bottom: $card-info-height;
       background: rgba(0, 0, 0, 0.5);
       border-radius:3px 3px 0 0;
+      a:link {
+        text-decoration: none;  
+      }
       p {
         color: white;
       }

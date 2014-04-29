@@ -51,6 +51,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         }]
       }
     })
+    .state('root.project', {
+      url: '/ato/:slug',
+      templateUrl: '/partials/projectPage.html',
+      controller: 'ProjectCtrl',
+      resolve: {
+        project: ['Project', '$stateParams', function (Project, $stateParams) {
+          return Project.get($stateParams.slug);
+        }]
+      }
+    })
     .state('root.volunteer', {
       url: '/voluntario/:slug',
       templateUrl: '/partials/volunteerProfile.html',

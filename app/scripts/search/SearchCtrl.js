@@ -7,7 +7,7 @@
 
 var app = angular.module('portoApp');
 
-app.controller('SearchCtrl', function ($scope, $http, $location, $anchorScroll, Search, $state, storage, defaultZoom) {
+app.controller('SearchCtrl', function ($scope, $http, $location, $anchorScroll, Search, $state, storage, defaultZoom, Cleanup) {
 
   $scope.search =  Search;
   window.map = constants.map;
@@ -88,10 +88,7 @@ app.controller('SearchCtrl', function ($scope, $http, $location, $anchorScroll, 
       if ($scope.search.nextUrlProject()) {
         $http.get($scope.search.nextUrlProject()).success( function (response) {
           response.results.forEach(function (project) {
-            project.causes.forEach(function (c) {
-              c.image = storage + 'cause_' + c.id + '.png';
-              c.class = 'cause_' + c.id;
-            });
+            Cleanup.projectForSearch(project);
             $scope.search.projects().push(project);
           });
           $scope.search.setNextUrlProject(response.next);
@@ -108,15 +105,7 @@ app.controller('SearchCtrl', function ($scope, $http, $location, $anchorScroll, 
       if ($scope.search.nextUrlNonprofit()) {
         $http.get($scope.search.nextUrlNonprofit()).success( function (response) {
           response.results.forEach(function (nonprofit) {
-            nonprofit.address = nonprofit.user.address;
-            var causes = [];
-            nonprofit.causes.forEach(function (c) {
-              var cause = {};
-              cause.image = storage + 'cause_' + c + '.png';
-              cause.class = 'cause_' + c;
-              causes.push(cause);
-            });
-            nonprofit.causes = causes;
+            Cleanup.nonprofitForSearch(nonprofit);
             $scope.search.nonprofits().push(nonprofit);
           });
           $scope.search.setNextUrlNonprofit(response.next);
