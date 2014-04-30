@@ -3,44 +3,6 @@
 var app = angular.module('portoApp');
 
 app.factory('Cleanup', function ($http, $q, Site, Restangular, api, NONPROFIT) {
-  var setStatusStyle = function(volunteer) {
-    if (volunteer.status === 'Voluntário') {
-      volunteer.statusStyle = {color: 'green'};
-    } else if (volunteer.status === 'Desistente') {
-      volunteer.statusStyle = {color: 'red'};
-    } else if (volunteer.status === 'Candidato') {
-      volunteer.statusStyle = {color: '#0081B2'};
-    } else if (volunteer.status === 'Ex-Voluntário') {
-      volunteer.statusStyle = {color: 'black'};
-    }
-  };
-
-  var setProjectStatusStyle  = function(project) {
-    if (!project.published) {
-      project.statusStyle = {'background-color': '#f2ae43'}; // label-warning color
-    } else if (project.closed) {
-      project.statusStyle = {'background-color': '#db524b'}; // label-danger color
-    } else if (!project.closed) {
-      project.statusStyle = {'background-color': '#58b957'}; // label-success color
-    }
-  };
-
-  var sanitizeProject = function (p, nonprofit) {
-    p.emailAllString = 'mailto:' + nonprofit.user.email + '?bcc=';
-    setProjectStatusStyle(p);
-    Restangular.one('project', p.slug).getList('volunteers', {page_size: 1000}).then(function (response) {
-      p.volunteers = response;
-      p.volunteers.forEach(function (v) {
-        p.emailAllString += v.email + ',';
-        Restangular.all('applies').getList({project_slug: p.slug, volunteer_slug: v.slug}).then(function (a) {
-          v.status = a[0].status.name;
-          setStatusStyle(v);
-          return;
-        });
-      });
-    });
-
-  };
 
   var fixCauses = function (inputCauses) {
     if (inputCauses && Site.causes()) {
