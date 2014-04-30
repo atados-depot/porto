@@ -25,12 +25,27 @@
   </head>
   <body>
 
-    <!--[if lt IE 7]>
-      <div class="alert">
-        <p class="browsehappy">Você está usando um navegador <strong>antiquado</strong>. Por favor <a href="https://www.google.com/intl/pt/chrome/browser/">atualize seu navegador</a> para melhorar sua experiencia na web.</p>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <script type="text/javascript">
+        var showBrowserMessage = function() {
+          var el = document.getElementById('screenshot')
+          el.style.display = 'none';
+          el = document.getElementById('message')
+          el.style.display = 'block';
+        }
+        setTimeout(showBrowserMessage, 10000);
+      </script>
+
+    <div id="message" style="background: #00AEEF;color: #FFF;width: 5000px;height: 5000px; padding-top: 10%; padding-left: 10%; display: none;">
+      <div>
+        <div style="font-size: 120px; width: 95px; position: absolute;">:(</div>
+        <div style="width: 800px; margin-left: 116px; font-size: 47px; display: block;"> Olá! o site da Porto Voluntário não suporta o browser que você está utilizando.</div>
       </div>
-    <![endif]-->
+      <div style="margin-top: 50px;">
+        <div style="font-size: 120px; width: 55%; position: absolute;">:)</div>
+        <div style="width: 800px; margin-left: 116px; font-size: 47px; padding-top: 23px;"> Abra o site com <a href="http://www.google.com/intl/pt-BR/chrome/browser/index.html" target="_blank">Chrome</a> ou <a href="http://www.mozilla.org/pt-BR/firefox/new/" target="_blank">Firefox</a> e aproveite!</div>
+      </div>
+    </div>
+    <img id="screenshot" onclick="showBrowserMessage()" alt="Screenshot do Porto Voluntário" width="100%" height="100%" src="http://atadosapp.s3.amazonaws.com/porto/screenshot.png" />
 
     <div ui-view=""></div>
 
