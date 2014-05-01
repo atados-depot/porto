@@ -25,6 +25,7 @@
   </head>
   <body>
 
+    <!--[if lt IE 9]>
       <script type="text/javascript">
         var showBrowserMessage = function() {
           var el = document.getElementById('screenshot')
@@ -35,17 +36,20 @@
         setTimeout(showBrowserMessage, 10000);
       </script>
 
-    <div id="message" style="background: #00AEEF;color: #FFF;width: 5000px;height: 5000px; padding-top: 10%; padding-left: 10%; display: none;">
-      <div>
-        <div style="font-size: 120px; width: 95px; position: absolute;">:(</div>
-        <div style="width: 800px; margin-left: 116px; font-size: 47px; display: block;"> Olá! o site da Porto Voluntário não suporta o browser que você está utilizando.</div>
+      <div id="message" style="background: #00AEEF;color: #FFF;width: 5000px;height: 5000px; padding-top: 10%; padding-left: 10%; display: none;">
+        <table style="width:300px">
+          <tr>
+            <td style="font-size: 120px; width: 95px; position: absolute;">:(</td>
+          <td style="width: 800px; margin-left: 116px; font-size: 47px; display: block;"> Olá! o site da Porto Voluntário não suporta o browser que você está utilizando.</td>
+          </tr>
+          <tr>
+          <td style="font-size: 120px; width: 55%; position: absolute;">:)</td>
+          <td style="width: 800px; margin-left: 116px; font-size: 47px; padding-top: 23px; display: block;"> Abra o site com <a href="http://www.google.com/intl/pt-BR/chrome/browser/index.html" target="_blank">Chrome</a> ou <a href="http://www.mozilla.org/pt-BR/firefox/new/" target="_blank">Firefox</a> e aproveite!</td>
+          </tr>
+        </table>
       </div>
-      <div style="margin-top: 50px;">
-        <div style="font-size: 120px; width: 55%; position: absolute;">:)</div>
-        <div style="width: 800px; margin-left: 116px; font-size: 47px; padding-top: 23px;"> Abra o site com <a href="http://www.google.com/intl/pt-BR/chrome/browser/index.html" target="_blank">Chrome</a> ou <a href="http://www.mozilla.org/pt-BR/firefox/new/" target="_blank">Firefox</a> e aproveite!</div>
-      </div>
-    </div>
-    <img id="screenshot" onclick="showBrowserMessage()" alt="Screenshot do Porto Voluntário" width="100%" height="100%" src="http://atadosapp.s3.amazonaws.com/porto/screenshot.png" />
+      <img id="screenshot" onclick="showBrowserMessage()" alt="Screenshot do Porto Voluntário" width="100%" height="100%" src="http://atadosapp.s3.amazonaws.com/porto/screenshot.png" />
+    <![endif]-->
 
     <div ui-view=""></div>
 
