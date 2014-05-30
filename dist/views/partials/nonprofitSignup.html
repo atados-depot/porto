@@ -1,0 +1,209 @@
+<div id="nonprofit-signup">
+  <div class="container">
+    <div class="page-header">
+      <h1>Vamos cadastrar sua ONG!</h1>
+    </div>
+    <div id="nonprofit-signup-form" class="clearfix">
+      <form novalidate="" role="form" class="form-horizontal" name="signupForm" ng-submit="signup()">
+        <div class="col-md-6">
+          <fieldset style="border-right: 2px solid #CFCFCF">
+            <legend>Sobre a ONG</legend>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.name.$error.required || signupForm.name.$invalid]">
+              <label class="col-sm-3 control-label">Nome</label>
+              <div class="col-sm-8">
+                <input required="" type="text" class="form-control" name="name" ng-model="nonprofit.name" ng-minlength="3" ng-maxlength="50" placeholder="Nome da ONG">
+                <label class="help-block" ng-show="signupForm.name.$error.minlength">Não pode ter menos de 3 caracteres.</label>
+                <label class="help-block" ng-show="signupForm.name.$error.maxlength">Não pode ter mais de 50 caracteres.</label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.slug.$error.required || signupForm.slug.$invalid]">
+              <div class="input-group col-sm-offset-3 col-sm-8">
+                <span class="input-group-addon">www.atados.com.br/ong/</span>
+                <input required="" type="text" class="form-control" name="slug" ng-model="nonprofit.user.slug" ng-minlength="3" ng-maxlength="50" placeholder="nome-da-ong">
+              </div>
+              <div class="col-sm-offset-3 col-sm-8">
+                <label class="help-block" ng-show="signupForm.slug.alreadyUsed">Não pode ser usado pois já existe.</label>
+                <label class="help-block" ng-show="signupForm.slug.hasSpace">Não pode ter espaço.</label>
+                <label class="help-block" ng-show="signupForm.slug.$error.minlength">Não pode ter menos de 3 caracteres.</label>
+                <label class="help-block" ng-show="signupForm.slug.$error.maxlength">Não pode ter mais de 50 caracteres.</label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.description.$error.required || signupForm.description.$invalid]">
+              <label class="col-sm-3 control-label">Descrição</label>
+              <div class="col-sm-8">
+                <textarea required="" class="form-control" rows="3" name="description" ng-model="nonprofit.description" ng-minlength="10" ng-maxlength="100" placeholder="Pequena descrição"></textarea>
+                <label class="help-block" ng-show="signupForm.description.$error.minlength">Não pode ter menos de 10 caracteres.</label>
+                <label class="help-block" ng-show="signupForm.description.$error.maxlength">Não pode ter mais de 100 caracteres.</label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.details.$error.required || signupForm.details.$invalid]">
+              <label class="col-sm-3 control-label">Detalhe</label>
+              <div class="col-sm-8">
+                <textarea required="" class="form-control" rows="5" name="details" ng-model="nonprofit.details" ng-minlength="10" ng-maxlength="1024" placeholder="Descrição em detalhe"></textarea>
+                <label class="help-block" ng-show="signupForm.details.$error.minlength">Não pode ter menos de 10 caracteres.</label>
+                <label class="help-block" ng-show="signupForm.details.$error.maxlength">Não pode ter menos de 1024 caracteres.</label>
+              </div>
+            </div>
+
+            <phone-input object="nonprofit" form="signupForm"></phone-input>
+
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.addressline.$error.required || signupForm.addressline.$invalid]">
+              <label class="col-sm-3 control-label">Endereço</label>
+              
+              <div class="col-sm-6">
+                <input required="" type="text" class="form-control" name="addressline" ng-model="nonprofit.address.addressline" placeholder="Rua">
+              </div>
+            </div>
+            <div ng-class="{true: 'has-error', false: 'has-success'}[signupForm.addressnumber.$error.required || signupForm.addressnumber.$invalid]">
+              <div class="col-sm-2" id="addressNumberField">
+                <input required="" type="text" class="form-control" name="addressnumber" ng-model="nonprofit.address.addressnumber" placeholder="#">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="addressline2" ng-model="nonprofit.address.addressline2" placeholder="Complemento">
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.neighborhood.$error.required || signupForm.neighborhood.$invalid]">
+              <div class="col-sm-4 col-sm-offset-3">
+                <input required="" type="text" class="form-control" name="neighborhood" ng-model="nonprofit.address.neighborhood" placeholder="Bairro">
+              </div>
+            </div>
+            <div ng-class="{true: 'has-error', false: 'has-success'}[signupForm.zipcode.$error.required || signupForm.zipcode.$invalid]">
+              <div class="col-sm-4">
+                <input required="" type="text" class="form-control" name="zipcode" ng-model="nonprofit.address.zipcode" ng-minlength="8" ng-maxlength="9" placeholder="CEP" id="zipcodeField">
+              </div>
+              <label class="help-block" ng-show="signupForm.zipcode.$error.minlength">Não pode ter menos de 8 caracteres.</label>
+              <label class="help-block" ng-show="signupForm.zipcode.$error.maxlength">Não pode ter mais de 9 caracteres.</label>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[!nonprofit.address.state]">
+              <div class="col-sm-8 col-sm-offset-3">
+                <label class="help-block" ng-hide="nonprofit.address.state">Estado obrigatório.</label>
+                <select class="form-control" ng-model="nonprofit.address.state" ng-options="s.name for s in states()">
+                  <option value="" disabled="disabled" selected="selected">Estado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[!nonprofit.address.city]">
+              <div class="col-sm-8 col-sm-offset-3">
+                <label class="help-block" ng-hide="nonprofit.address.city">Cidade obrigatório.</label>
+                <select class="form-control" ng-model="nonprofit.address.city" ng-options="c.name for c in stateCities" ng-disabled="!cityLoaded">
+                  <option value="" disabled="disabled" selected="selected">Cidade</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <label class="col-sm-offset-3">
+              <input type="checkbox" ng-model="nonprofit.hidden_address"> Por motivos de segurança, por favor não publique o endereço da ONG para o público.
+            </label>
+
+            <causes all="causes()" selected="nonprofit.causes"></causes>
+          </fieldset>
+
+        </div> <!-- 1st column -->
+
+        <div class="col-md-6">
+          <fieldset>
+            <legend>A ONG na internet</legend>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Facebook</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <span class="input-group-addon">facebook.com/</span>
+                  <input type="text" name="facebookpage" ng-model="nonprofit.facebook_page" placeholder="ong" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Google+</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <span class="input-group-addon">plus.google.com/</span>
+                  <input type="text" name="googlepage" ng-model="nonprofit.google_page" placeholder="id" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Twitter</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <span class="input-group-addon">@</span>
+                  <input type="text" name="twitterhandle" ng-model="nonprofit.twitter_handle" class="form-control" placeholder="handle_ong">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Website</label>
+              <div class="col-sm-8">
+                <input type="text" name="website" ng-model="nonprofit.website" class="form-control" placeholder="wwww.ong.com.br">
+              </div>
+            </div>
+
+            <legend>Sobre você</legend>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.responsiblename.$error.required || signupForm.responsiblename.$invalid]">
+              <label class="col-sm-3 control-label">Nome</label>
+              <div class="col-sm-8">
+                <input required="" class="form-control" type="text" name="responsiblename" ng-model="nonprofit.user.name" ng-maxlength="30" placeholder="Nome">
+                <label class="help-block" ng-show="signupForm.responsiblename.$error.maxlength">Não pode ter mais de 30 caracteres.</label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error',false: 'has-success'}[signupForm.email.$invalid]">
+              <label class="col-sm-3 control-label">Email</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="email" name="email" ng-model="nonprofit.user.email" placeholder="Email" required="">
+                <label class="help-block" ng-show="signupForm.email.alreadyUsed">Email já é usado</label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.email.$error.required || signupForm.email.$invalid]">
+              <div class="col-sm-8 col-sm-offset-3">
+                <input class="form-control" required="" type="email" name="emailConfirm" ng-model="emailConfirm" placeholder="Confirme email">
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
+              <label class="col-sm-3 control-label">Senha</label>
+              <div class="col-sm-8">
+                <input required="" class="form-control" type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Senha">
+              </div>
+            </div>
+            <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
+              <div class="col-sm-8 col-sm-offset-3">
+                <input class="form-control" required="" type="password" name="passwordConfirm" ng-model="passwordConfirm" ng-minlength="6" placeholder="Confirme senha">
+                <label class="help-block" ng-show="signupForm.password.doesNotMatch">Senhas tem que ser igual</label>
+                <label class="help-block" ng-show="signupForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
+              </div>
+            </div>
+
+            <legend>Logo da ONG</legend>
+            <div class="row">
+              <img class="col-md-3" width="90" height="100" alt="Foto cover da ONG " src="https://s3-sa-east-1.amazonaws.com/atadosapp/project/default_project.jpg">
+              <div class="form-group col-md-6" ng-class="{true: 'has-error', false: 'has-success'}[!imageUploaded]">
+                <label class="help-block" ng-hide="imageUploaded">Não se esqueça de nos dar o logo da ONG. </label>
+                <label class="btn btn-info" for="image-file-input"><i class="fa fa-edit"></i> Escolher foto...</label>
+                <input style="display: none" required="" id="image-file-input" type="file" name="file" onchange="angular.element(this).scope().uploadImageFile(this.files)">
+              </div>
+            </div>
+
+            <legend>Foto cover da ONG</legend>
+            <div class="row">
+              <img class="col-md-3" width="90" height="100" alt="Foto cover da ONG " src="https://s3-sa-east-1.amazonaws.com/atadosapp/project/default_project.jpg">
+              <div class="form-group col-md-6" ng-class="{true: 'has-error', false: 'has-success'}[!coverUploaded]">
+                <label class="help-block" ng-hide="coverUploaded">Escolha uma foto cover bem bonita e de alta qualidade!</label>
+                <label class="btn btn-info" for="cover-file-input"><i class="fa fa-edit"></i> Escolher foto...</label>
+                <input style="display: none" required="" id="cover-file-input" type="file" name="file" onchange="angular.element(this).scope().uploadCoverFile(this.files)">
+              </div>
+            </div>
+
+            <div style="margin-top: 130px" class="alert alert-warning col-md-12">
+              <p>Ao clicar em "Finalizar", você estará indicando que leu e concorda com os <a class="alert-link" tabindex="-1" ng-click="openTermsModal()" href="">Termos de uso e Políticas de privacidade</a>.</p>
+            </div>
+
+          <button type="submit" class="btn btn-large btn-block btn-info" ng-disabled="signupForm.$invalid || !(imageUploaded && coverUploaded && causeChosen)">Finalizar cadastro</button>
+
+          </fieldset>
+        </div> <!-- 2nd column -->
+      </form>
+    </div>
+  </div>
+</div>

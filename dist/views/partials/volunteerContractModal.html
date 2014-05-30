@@ -1,0 +1,68 @@
+<style>
+  .modal .modal-dialog {
+    width: 730px;
+  }
+</style>
+
+<div id="volunteer-contract-modal" class="modal-body">
+
+  <p> Boa! Esse é o primeiro passo para ser voluntário da <strong>{{nonprofit.name}}</strong>.</p>
+  <p> Ao participar deste ato voluntário, você concorda com o termo de adesão abaixo.</p>
+  <div id="contract">
+    <p><strong>CONDIÇÕES GERAIS:</strong></p>
+
+    <ul>
+      <li>
+      O trabalho voluntário a ser desempenhado junto ao <strong>{{nonprofit.name}}</strong>, de acordo com a Lei nº 9.608 de 18/02/98, transcrita no verso, é atividade não remunerada, e não gera vínculo empregatício nem funcional, ou quaisquer obrigações trabalhistas e previdenciárias ou afins. 
+      </li>
+      <li>
+      Compete ao Voluntário participar das atividades e cumprir com empenho e interesse a função estabelecida. A discordância ou o descumprimento das normas estabelecidas no Regimento Interno acarretará o afastamento ou desligamento do voluntário. Será de inteira responsabilidade do voluntário qualquer dano ou prejuízo que vier a causar ao <strong>{{nonprofit.name}}</strong>. 
+      </li>
+      <li>
+      O voluntário isenta o <strong>{{nonprofit.name}}</strong> de qualquer responsabilidade referente a acidentes pessoais ou materiais, que por ventura, venham a ocorrer no desempenho de suas atividades. 
+      </li>
+      <li>
+      O voluntário ou voluntária autoriza o uso de sua imagem e som em caráter irrevogável, irretratável e de forma gratuita pelo {{nonprofit.name}}. 
+      </li>
+      <li>
+      O desligamento do voluntário das atividades do <strong>{{nonprofit.name}}</strong> poderá ocorrer a qualquer momento, bastando apenas o desejo expresso de uma das partes, sendo necessária a assinatura do Termo de Desligamento. 
+      </li>
+      <li>
+      As despesas decorrentes de sua atividade voluntária serão ressarcidas desde que autorizadas antecipadamente pelo <strong>{{nonprofit.name}}</strong>. 
+      </li>
+    </ul>
+
+    <p>
+    O presente Termo de Adesão estará em vigor até o final do presente ano, quando deverá ser renovado, caso seja de interesse de ambas as partes.
+    </p>
+    <p>
+    Declaro estar ciente da legislação específica, regimento interno e descritivo de função, e que aceito atuar como voluntário conforme este Termo de Adesão. Data e assinaturas do Voluntário e do Coordenador de voluntários.
+    </p>
+  </div>
+
+  <p>Confirme suas informações para entrarmos em contato com a ONG.</p>
+
+
+  <div class="row" id="phone-field">
+    <phone-input object="contractForm" form="contractForm"></phone-input>
+  </div>
+
+
+  <div class="row" id="name-field">
+    <div class="form-group" ng-class="{error:contractForm.name.$dirty && contractForm.name.$invalid && phoneWarningMessage}">
+      <label class="col-lg-3 control-label">Nome do voluntário</label>
+      <div class="col-lg-5">                     
+        <input class="form-control" type="text" name="name" ng-model="contractForm.name" placeholder="Nome">
+      </div>
+    </div>
+  </div>
+
+  <p>Conte para a <strong>{{nonprofit.name}}</strong> um pouquinho do que te levou a ser voluntário deste ato =)</p>
+  <textarea ng-model="contractForm.message"></textarea>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()">Ok, quero ser voluntário!</button>
+  <button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
+  <doubt-atados>
+</div>

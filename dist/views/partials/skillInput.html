@@ -1,0 +1,15 @@
+<legend>Habilidades (selecione uma ou mais)</legend>
+<div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[!skillChosen]">
+  <div class="col-sm-12">
+    <label class="help-block" ng-hide="skillChosen">Escolha pelo menos uma habilidade.</label>
+    <ul class="select-button-list">
+      <li class="col-sm-3 col-xs-4" ng-repeat="skill in all" ng-class="{checked: inSelected(skill)}" ng-show="skill.id != 0">
+      <div class="square center" ng-click="addSkill(skill)">
+        <div ng-class="skill.class" class="center"></div>
+        <p>{{skill.name}}</p>
+      </div>
+      <i class="fa fa-check-circle"></i>
+      </li>
+    </ul>
+  </div>
+</div>

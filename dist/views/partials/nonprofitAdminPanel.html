@@ -1,0 +1,72 @@
+<div id="nonprofit-admin" class="row">
+  <div class="col-sm-offset-1">
+    <div class="col-sm-9">
+      <p tooltip="Atados está analizando a sua ONG para ser aprovada no site. Espere um pouco e entraremos em contato :)" ng-show="!nonprofit.published" class="label label-danger">
+      ONG em processo de revisão
+      </p>
+      <h1>Controle de Atos e Voluntários</h1>
+    </div>
+
+    <button id="edit-nonprofit-button" class="btn btn-large btn-info" ui-sref="root.nonprofitedit">Editar ONG</button>
+    <button id="new-project-button" class="btn btn-info btn-large" ui-sref="root.newproject">Criar Novo Ato</button>
+
+
+    <p class="col-xs-12"> Lista de atos <span style="color: #58b957">abertos</span>, <span style="color: #db524b">fechados</span> e <span style="color: #f2ae43">não aprovados</span>.</p>
+    <div id="project-management" ng-hide="nonprofit.projects.length === 0">
+      <div class="col-md-4" id="project-list">
+        <button class="btn col-md-12" ng-repeat="project in nonprofit.projects" ng-class="{choosenProject: project===activeProject}" ng-click="changeActiveProject(project)">
+          <span ng-style="project.statusStyle" class="badge">{{project.volunteers.length}}</span>
+          {{project.name}} 
+        </button>
+      </div>
+      <div class="col-md-7" id="active-project">
+        <div id="project-name">
+          <h3>
+            <a ui-sref="root.project({slug: activeProject.slug})">{{activeProject.name}}</a>
+            <span tooltip="Ato não pode mais receber voluntários mas ainda está visivel na internet." ng-show="activeProject.closed && activeProject.published" class="pull-right label label-danger">Ato Finalizado</span>
+            <span tooltip="Aberto para o público da internet ver e se atar !" ng-show="!activeProject.closed && activeProject.published" class="pull-right label label-success">Ato Aberto</span>
+            <span tooltip="O pessoal do Atados está analisando o seu Ato e já entrará em contato!" ng-show="!activeProject.published" class="pull-right label label-warning">Ato em aprovação</span>
+          </h3>
+        </div>
+        <div class="" id="project-action-buttons">
+          <a class="" ng-click="editProject(activeProject)" id="edit-project"><i class="fa fa-edit"></i> Editar Ato</a>  
+          <a class="" ng-click="cloneProject(activeProject)" id="clone-project"><i class="fa fa-copy"></i> Duplicar Ato</a>  
+          <a class="" ng-click="closeOrOpenProject(activeProject)" id="close-project" ng-hide="activeProject.closed"><i class="fa fa-times-circle-o"></i> Fechar Inscrições</a>
+          <a class="" ng-click="closeOrOpenProject(activeProject)" id="open-project" ng-show="activeProject.closed"><i class="fa fa-times-circle-o"></i> Abrir Inscrições</a>
+          <a class="" href="{{activeProject.emailAllString}}" target="_blank" id="send-email-all"><i class="fa fa-envelope-o"></i> Enviar Email para todos</a>  
+          <a class="" ng-click="exportList(activeProject)" id="export-list"><i class="fa fa-table"></i> Exportar lista como planilha</a>  
+        </div>
+        <table class="table table-striped" id="project-volunteer-table">
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Status</th>
+          </tr>
+          <tr ng-repeat="volunteer in activeProject.volunteers">
+            <td>{{volunteer.name}}</td>
+            <td>
+              {{volunteer.email}}
+              <a href="mailto:{{volunteer.email}}" target="_blank" class="pull-right" id="send-email-button"><i tooltip="Mande email só para esse voluntário" class="fa fa-envelope-o"></i></a>
+            </td>
+            <td>{{volunteer.phone}}</td>
+            <td>
+              <li class="dropdown">
+              <a class="dropdown-toggle" ng-style="volunteer.statusStyle">
+                {{volunteer.status}} 
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="status in volunteerStatusOptions">
+                <a ng-click="changeVolunteerStatus(volunteer, status)">{{status}}</a>
+                </li>
+              </ul>
+              </li>
+            </td>
+          </tr>
+        </table>
+        <p class="center" ng-hide="activeProject.volunteers">Esse ato não tem voluntários.</p>
+      </div>
+    </div>
+  </div>
+</div>

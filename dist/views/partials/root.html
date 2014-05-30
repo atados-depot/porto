@@ -1,0 +1,56 @@
+<div id="top" class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="navbar-inner container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ui-sref="root.home">Atados</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+      <form class="navbar-form navbar-left" role="search" ng-submit="siteSearch()" ng-hide="explorerView">
+        <input id="siteSearch" class="form-control" ng-model="search.landingQuery" type="text" placeholder="Pesquise por atos e ONGs">
+        <button id="searchIcon"><i class="fa fa-search"></i></button>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">                                                                                
+        <li ng-hide="loggedUser"><button class="btn navbar-btn" ng-click="openLogin()">Logar</button></li>
+        <li ng-hide="explorerView"><button class="btn navbar-btn" ng-click="goToExplore()">Ver Atos</button></li>
+      </ul>                                                                                                                   
+
+      <form class="navbar-form navbar-right" ng-show="loggedUser" style="margin: 0">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ loggedUser.slug }}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="root.volunteer({slug: loggedUser.slug})">Meu perfil</a></li>
+              <li><a ui-sref="root.volunteeredit">Editar perfil</a></li>
+              <li><a ng-click="logout()">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div ui-view="" class="main"></div>
+
+
+
+<div id="footer" ng-hide="explorerView">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <span>Uma parceria:</span>
+        <a href="http://www.portoseguro.com.br" class="portoLogo">Porto Seguro</a>
+        <a href="https://www.atados.com.br" class="atadosLogo">Atados</a>
+      </div>
+    </div>
+  </div>
+</div>

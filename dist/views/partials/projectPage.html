@@ -1,0 +1,154 @@
+<div id="project-page">
+  <div id="project-header" class="row">
+    <div class="col-sm-offset-1 col-sm-3" id="project-image">
+      <img alt="{{project.slug}}" class="img-responsive" ng-src="{{project.image_url}}">
+    </div>
+    <div class="col-sm-5">
+      <h1 id="project-name">{{project.name}}</h1>
+      <div id="project-type">
+        <p ng-if="project.work"><i class="fa fa-refresh"></i> Ato Recorrente</p>
+        <p ng-if="project.job">
+          <i class="fa fa-clock-o"></i> Ato Pontual 
+          
+        </p>
+        <small ng-if="project.job && (project.job.start_date === project.job.end_date)">
+           {{project.job.end_date | date:"(EEEE) dd 'de' MMMM 'de' yyyy"}}
+        </small>
+        <small ng-if="project.job && (project.job.start_date !== project.job.end_date)">
+           {{project.job.start_date | date:"dd 'de' MMMM 'de' yyyy"}} até {{project.job.end_date | date:"dd 'de' MMMM 'de' yyyy"}}
+        </small>
+
+      </div>
+      <div id="project-nonprofit">
+        <a ui-sref="root.nonprofit({slug: nonprofit.user.slug})" id="nonprofit-img">
+          <img alt="{{nonprofit.slug}}" ng-src="{{project.nonprofit_image}}">
+        </a>
+        <span>
+          <a ui-sref="root.nonprofit({slug: nonprofit.user.slug})">
+            <p id="nonprofit-name"><strong>{{nonprofit.name}}</strong></p>
+          </a>
+          <p id="nonprofit-local">{{project.nonprofit_city_state}}</p>
+          <a ng-if="nonprofit.facebook_page" href="{{nonprofit.facebook_page}}" target="_blank"><i class="fa fa-facebook-square"></i></a>
+          <a ng-if="nonprofit.google_page" href="{{nonprofit.google_page}}" target="_blank"><i class="fa fa-twitter"></i></a>
+          <a ng-if="nonprofit.twitter_handle" href="{{nonprofit.twitter_handle}}" target="_blank"><i class="fa fa-google-plus"></i></a>
+          <a ng-if="nonprofit.website" href="{{nonprofit.website}}" target="_blank"><i class="fa fa-home"></i></a>
+        </span>
+      </div>
+
+      <div class="row" id="project-icons">
+        <div class="col-sm-6" ng-if="project.causes">
+          <p>Causas</p>
+          <div class="img-circle icon-image" ng-repeat="cause in project.causes"> 
+            <img alt="{{cause.name}}" tooltip="{{cause.name}}" width="20" height="20" ng-src="{{cause.image}}">
+          </div>
+        </div>
+        <div class="col-sm-6" ng-if="project.skills">
+          <p>Habilidades</p>
+          <div class="img-circle icon-image" ng-repeat="skill in project.skills"> 
+            <img alt="{{skill.name}}" tooltip="{{skill.name}}" width="20" height="20" ng-src="{{skill.image}}">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-2">
+      <button id="atar-button" ng-disabled="loggedUser && loggedUser.role==='NONPROFIT'" ng-hide="project.closed || alreadyApplied" class="btn" ng-class="{active: alreadyApplied}" ng-click="applyVolunteerToProject()"><i class="fa fa-heart"></i> Quero ser voluntário</button>
+      <button id="atar-button" ng-disabled="loggedUser && loggedUser.role==='NONPROFIT'" ng-show="alreadyApplied" class="btn" ng-class="{active: alreadyApplied}" ng-click="applyVolunteerToProject()"><i class="fa fa-chain-broken"></i> Não quero mais</button>
+      <button id="atar-button" disabled="disabled" ng-hide="alreadyApplied || !project.closed" class="btn"><i class="fa fa-times"></i> Ato Fechado</button>
+
+      <div id="project-volunteers"> 
+        <h4 ng-show="project.volunteers.length > 1">{{project.volunteers.length}} voluntários cadastrados</h4>
+        <h4 ng-show="project.volunteers.length == 1">{{project.volunteers.length}} voluntário cadastrado</h4>
+
+        <p ng-if="project.volunteers.length === 0">Seja o primeiro a se atar!</p>
+        <div id="cards">
+          <a ui-sref="root.volunteer({slug: volunteer.slug})" target="_blank" ng-repeat="volunteer in project.volunteers"><img alt="{{volunteer.slug}}" width="47" height="47" ng-src="{{volunteer.image_url}}"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="project-details" class="row">
+    <div id="left-sidebar" class="col-sm-offset-1 col-sm-3">
+      <h5>Sobre a organização</h5>
+      <p>{{project.nonprofit.description}}</p>
+      <div id="project-map" ng-if="(!project.work || !project.work.can_be_done_remotely) && project.address.addressline">
+        <h5>Localização</h5>
+
+        <gm-map gm-map-id="'projectAddressMap'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:100%;height:200px">
+
+          <gm-markers gm-objects="markers" gm-id="object.id" gm-position="{ lat: object.latitude, lng: object.longitude }">
+          </gm-markers>
+        </gm-map>
+
+        <p ng-if="project.address"><i class="fa fa-map-marker"></i> {{project.address | as_location_string}}</p>
+      </div>
+      <p ng-if="project.work && project.work.can_be_done_remotely" id="project-remote"><i class="fa fa-rss"></i> Trabalho remoto</p>
+
+      <div id="project-responsible"> 
+        <h5>Responsável pelo ato</h5>
+        <p ng-if="project.responsible"><i class="fa fa-laptop col-xs-1"></i>{{project.responsible}}</p>
+        <p ng-if="project.email"><i class="fa fa-inbox col-xs-1"></i><a href="mailto:{{project.email}}" target="_blank">{{project.email}}</a></p>
+        <p ng-if="project.phone"><i class="fa fa-phone col-xs-1"></i>{{project.phone}}</p>
+      </div>
+
+      <div ng-if="project.facebook_event" id="project-facebook">
+         <a href="{{project.facebook_event}}" target="_blank"><i class="fa fa-facebook-square"></i> Veja o Ato no Facebook !</a>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <h3>Sobre o ato</h3>
+      <div ng-bind-html="project.details | noHTML | newlines"></div>
+
+      <div ng-if="project.roles" id="project-roles">
+        <h3>Cargos</h3>
+        <div ng-repeat="role in project.roles" class="role">
+          <h4>{{role.name}}</h4>
+          <p>{{role.details}}</p>
+          <p><strong>Pré-requisito:</strong> {{role.prerequisites}}</p>
+          <p><strong>Vagas:</strong> {{role.vacancies}}</p>
+        </div>
+      </div>
+
+
+      <!--<div ng-if="project.work" id="project-availabilities">
+        <h3>Horários</h3>
+        <p><strong>Horas por semana: </strong>{{project.work.weekly_hours}}</p>
+        <div class="row">
+          <div class="col-sm-3 table-labels">
+            <div class="table-label">Manhã</div><span class="triangle"></span>
+            <div class="table-label">Tarde</div><span class="triangle"></span>
+            <div class="table-label">Noite</div><span class="triangle"></span>
+          </div>
+          <div class="col-sm-5">
+            <table cellspacing="0" cellpadding="0">
+              <colgroup span="7"></colgroup>
+              <tbody>
+                <tr class="weekdays">
+                  <th scope="col" title="Domingo">Dom</th>
+                  <th scope="col" title="Segunda">Seg</th>
+                  <th scope="col" title="Terça">Ter</th>
+                  <th scope="col" title="Quarta">Qua</th>
+                  <th scope="col" title="Quinta">Qui</th>
+                  <th scope="col" title="Sexta">Sex</th>
+                  <th scope="col" title="Sabado">Sab</th>
+                </tr>
+                <tr ng-repeat="days in project.work.availabilities">
+                  <td ng-repeat="period in days">
+                    <i ng-if="period.checked" class="fa fa-check" style="color:green;"></i>
+                    <i ng-if="!period.checked" class="fa fa-check" style="color:white;"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>-->
+    </div>
+    <div class="col-sm-offset-5 col-sm-5" style="margin-top: 30px">
+      <button id="atar-button" class="col-sm-12" ng-disabled="loggedUser && loggedUser.role==='NONPROFIT'" ng-hide="project.closed || alreadyApplied" class="btn" ng-class="{active: alreadyApplied}" ng-click="applyVolunteerToProject()"><i class="fa fa-heart"></i> Quero ser voluntário</button>
+    </div>
+  </div>
+</div>
