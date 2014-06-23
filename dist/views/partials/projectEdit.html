@@ -4,14 +4,14 @@
       <h1 class="form-heading">Editando "{{project.name}}"</h1>
     </div>
 
-    <form novalidate="" role="form" class="form-horizontal" name="editProjectForm" ng-submit="saveProject()">
+    <form novalidate role="form" class="form-horizontal" name="editProjectForm" ng-submit="saveProject()">
       <fieldset>
         <legend>Sobre o Ato</legend>
 
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[editProjectForm.projectname.$error.required || editProjectForm.projectname.$invalid]">
           <label class="col-md-3 control-label" for="projectname">Nome</label>
           <div class="col-md-8">
-            <input required="" type="text" class="form-control" name="projectname" ng-minlength="3" ng-maxlength="50" ng-model="project.name" placeholder="Nome do Ato">
+            <input required type="text" class="form-control" name="projectname" ng-minlength="3" ng-maxlength="50" ng-model="project.name" placeholder="Nome do Ato">
             <label class="help-block" ng-show="editProjectForm.projectname.$error.minlength">Não pode ter menos de 3 caracteres.</label>
             <label class="help-block" ng-show="editProjectForm.projectname.$error.maxlength">Não pode ter mais de 50 caracteres.</label>
           </div>
@@ -20,7 +20,7 @@
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[editProjectForm.description.$error.required || editProjectForm.description.$invalid]">
           <label class="col-md-3 control-label">Resumo (160 caracteres)</label>
           <div class="col-md-8">
-            <textarea class="form-control" rows="2" name="description" ng-model="project.description" ng-minlength="10" ng-maxlength="160" required=""></textarea>
+            <textarea class="form-control" rows="2" name="description" ng-model="project.description" ng-minlength="10" ng-maxlength="160" required></textarea>
             <label class="help-block" ng-show="editProjectForm.description.$error.minlength">Não pode ter menos de 10 caracteres.</label>
             <label class="help-block" ng-show="editProjectForm.description.$error.maxlength">Não pode ter mais de 160 caracteres.</label>
             <label>Essa descrição não pode ultrapassar mais de 160 caracters. Vai ser usada para dar um resumo rápido do Ato quando os voluntários estiverem procurando.</label>
@@ -30,7 +30,7 @@
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[editProjectForm.details.$error.required || editProjectForm.details.$invalid]">
           <label class="col-md-3 control-label">Descrição</label>
           <div class="col-md-8">
-            <textarea class="form-control" rows="5" name="details" ng-model="project.details" ng-minlength="10" ng-maxlength="1024" placeholder="" required=""></textarea>
+            <textarea class="form-control" rows="5" name="details" ng-model="project.details" ng-minlength="10" ng-maxlength="1024" placeholder="" required></textarea>
             <label class="help-block" ng-show="editProjectForm.details.$error.minlength">Não pode ter menos de 10 caracteres.</label>
             <label class="help-block" ng-show="editProjectForm.details.$error.maxlength">Não pode ter mais de 1024 caracteres.</label>
             <label>Aqui você pode aproveitar e escrever todos os detalhes para os voluntários.</label>
@@ -104,7 +104,7 @@
             <label class="help-block" ng-show="editProjectForm.responsible.$error.minlength">Não pode ter menos de 2 caracteres.</label>
             <label class="help-block" ng-show="editProjectForm.responsible.$error.maxlength">Não pode ter mais de 50 caracteres.</label>
             <label class="help-block" ng-show="editProjectForm.responsible.$error.required">Obrigatório colocar nome do reponsável pelo Ato.</label>
-            <input required="" class="form-control" type="text" name="responsible" ng-minlength="2" ng-maxlength="50" ng-model="project.responsible" placeholder="Nome do Responsável">
+            <input required class="form-control" type="text" name="responsible" ng-minlength="2" ng-maxlength="50" ng-model="project.responsible" placeholder="Nome do Responsável">
           </div>
         </div>
 
@@ -115,7 +115,7 @@
           <div class="col-md-8">                     
             <label class="help-block" ng-show="editProjectForm.email.$error.required">Precisamos de email caso voluntário ou Atados queiram entrar em contato.</label>
             <label class="help-block" ng-show="editProjectForm.email.$invalid && editProjectForm.email.$dirty">Email inválido.</label>
-            <input class="form-control" type="email" name="email" ng-model="project.email" placeholder="Email" required="">
+            <input class="form-control" type="email" name="email" ng-model="project.email" placeholder="Email" required>
           </div>
         </div>
       </fieldset>

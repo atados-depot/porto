@@ -8,12 +8,12 @@
   <div class="row">
     <div class="col-md-5" ng-controller="LoginCtrl">
       <p>Login com email @portoseguro.com.br</p>
-      <form novalidate="" name="loginForm" ng-submit="login()">
+      <form novalidate name="loginForm" ng-submit="login()">
 
         <porto-seguro-email-input object="email" form="loginForm"></porto-seguro-email-input>
 
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[loginForm.password.$error.required || loginForm.password.$invalid || wrongCredentials]">
-          <input required="" class="form-control" type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Senha">
+          <input required class="form-control" type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Senha">
           <label class="help-block" ng-show="loginForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
           <label class="help-block" ng-show="wrongCredentials">Usuário ou senha estão errados :(</label>
         </div>
@@ -29,10 +29,10 @@
         </div>
       </form> 
 
-      <form novalidate="" name="resetPasswordForm" role="form" ng-show="showForgotPassword">
+      <form novalidate name="resetPasswordForm" role="form" ng-show="showForgotPassword">
         <label class="help-block">Digite seu email para receber uma nova senha.</label>
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[resetPasswordForm.forgotEmail.$error.required || resetPasswordForm.forgotEmail.$invalid]">
-          <input required="" type="forgotEmail" name="forgotEmail" class="form-control" ng-model="forgotEmail" placeholder="Email">
+          <input required type="forgotEmail" name="forgotEmail" class="form-control" ng-model="forgotEmail" placeholder="Email">
           <label class="help-block" ng-show="resetPasswordForm.forgotEmail.$dirty && !resetPasswordForm.forgotEmail.alreadyUsed">Email não existe.</label>
         </div>
         <button class="btn" ng-disabled="resetPasswordForm.forgotEmail.$invalid" ng-click="resetPassword()">Mandar senha</button>
@@ -41,9 +41,9 @@
 
     <div class="col-md-offset-2 col-md-5" id="volunteer-signup-form" ng-controller="VolunteerSignupCtrl">
       <p>... ou cadastre uma nova conta.</p>
-      <form novalidate="" name="signupForm" ng-submit="signup()">
+      <form novalidate name="signupForm" ng-submit="signup()">
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.slug.$error.required || signupForm.slug.$invalid || signupForm.slug.$error.minlength]">
-          <input class="form-control" type="text" name="slug" ng-model="slug" ng-minlength="3" placeholder="Nome de usuário" required="">
+          <input class="form-control" type="text" name="slug" ng-model="slug" ng-minlength="3" placeholder="Nome de usuário" required>
           <label class="help-block" ng-show="signupForm.slug.$error.minlength">Nome de usuário muito curto.</label>
           <label class="help-block" ng-show="signupForm.slug.hasSpace">Nome do usúario não pode ter espaço.</label>
           <label class="help-block" ng-show="signupForm.slug.hasDot">Nome do usúario não pode ter ponto "."</label>
@@ -53,11 +53,11 @@
         <porto-seguro-email-input signup="true" object="email" form="signupForm"></porto-seguro-email-input>
 
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
-          <input class="form-control" required="" type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Senha">
+          <input class="form-control" required type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Senha">
         </div>
 
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
-          <input class="form-control" required="" type="password" name="passwordConfirm" ng-model="passwordConfirm" ng-minlength="6" placeholder="Confirmar senha">
+          <input class="form-control" required type="password" name="passwordConfirm" ng-model="passwordConfirm" ng-minlength="6" placeholder="Confirmar senha">
           <label class="help-block" ng-show="signupForm.password.doesNotMatch">Senhas tem que ser igual</label>
           <label class="help-block" ng-show="signupForm.password.$error.minlength">Senha tem que ter mais de 6 caracteres</label>
         </div>
