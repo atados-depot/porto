@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'development',
           api: 'http://www.atadoslocal.com.br:8000/v1/',
-          authApi: 'http://www.atadoslocal.com.br:9000/auth/client',
+          authApi: 'http://www.atadoslocal.com.br:9001/auth/client',
           storage: 'http://www.atadoslocal.com.br:8000/static/images/',
           selected: 'http://www.atadoslocal.com.br:8000/static/images/heart.png',
           notselected: 'http://www.atadoslocal.com.br:8000/static/images/blue.png',

@@ -5,7 +5,7 @@
 
 .constant("api", "http://www.atadoslocal.com.br:8000/v1/")
 
-.constant("authApi", "http://www.atadoslocal.com.br:9000/auth/client")
+.constant("authApi", "http://www.atadoslocal.com.br:9001/auth/client")
 
 .constant("storage", "http://www.atadoslocal.com.br:8000/static/images/")
 
