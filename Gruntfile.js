@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'production',
           api: 'https://api.atados.com.br/v1/',
-          authApi: 'https://www.atados.com.br/auth/client',
+          authApi: 'https://www.portovoluntario.com.br/auth/client',
           storage: 'https://s3-sa-east-1.amazonaws.com/atadosapp/images/',
           selected: 'https://s3-sa-east-1.amazonaws.com/atadosapp/images/heart.png',
           notselected: 'https://s3-sa-east-1.amazonaws.com/atadosapp/images/blue.png',
