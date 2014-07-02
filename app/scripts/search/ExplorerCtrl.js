@@ -13,7 +13,7 @@ var app = angular.module('portoApp');
 
 app.controller('ExplorerCtrl', function ($scope, $rootScope, $filter, notselected, selected, defaultZoom) {
 
-  $scope.site.title = 'Atados - Explore';
+  $scope.site.title = 'Porto Voluntário - Explore';
   $scope.landing = false;
   $rootScope.explorerView = true;
 
