@@ -2,23 +2,23 @@
 
 var app = angular.module('portoApp');
 
-app.controller('HomeCtrl', function($scope, $sce) {
+app.controller('HomeCtrl', function($scope) {
   $scope.site.title = 'Atados - Juntando Gente Boa';
 
   $scope.depoimentos = [{
-    quote: 'Atar-se a alguém é de fato um ato de coragem  e essa é uma qualidade que não falta nos corações de quem é do Atados. Grande exemplo para aqueles que nasceram incomodados. Se voce é um tipo desses, experimente atar-se e nunca mais será o mesmo. Seja uma cartinha toda semana, um dia no asilo ou uma festa com gente de várias nações, viva a experiência!',
-    name: 'Talyta Santos',
-    where: $sce.trustAsHtml('Funcionária da <a href="http://www.boehringer-ingelheim.com.br/" target="_blank"><strong> Boehringer</strong></a>'),
-    image: 'talyta.jpg'
+    quote: 'Ser voluntário para mim é ser doador do bem, isso dá proposito para minha vida! Aprendi a vencer obstáculos e quebrar paradigmas sociais! Ser voluntário é ser doador de amor, mantendo uma porta aberta para esperança e para o novo! A ação voluntária mudou minha vida, sou mais feliz, assim, posso fazer outras pessoas felizes também. Aprendi a dividir o que já tenho e a conquistar o que desejo.',
+    name: 'Bruna Pereira',
+    where: 'Agronegócios',
+    image: 'bruna.jpg'
   }, {
-    quote: 'O Atados é um grupo de pessoas que quer mudar pessoas indignadas, que se juntaram para propiciar a outros novas possibilidades de ver e viver. Pessoas que acreditam que toda nova experiência e transformadora, e que querem tornar acessíveis diferentes formas de conhecer e de encontrar com o outro.',
-    name: 'Marcela Aruda',
-    where: $sce.trustAsHtml('Voluntária da <a ui-sref="root.nonprofit({slug: "mudacoletivo"})" target="_blank"><strong> Muda Coletivo</strong></a>'),
-    image: 'marcela.jpg'
+    quote: 'É a peça do quebra-cabeça da vida que faltava para eu entender o sentido da minha. É estar motivado para participar, ajudar, mudar, sorrir e receber como recompensa outro sorriso. É estar alinhado com os valores de uma empresa e com verdadeiros valores de um ser humano que compartilha o bem. É saber viver e amar a tudo e a todos. É a melhor parte da minha vida',
+    name: 'Danilo Barros',
+    where: 'Segurança da Informação',
+    image: 'danilo.jpg'
   }, {
-    quote: 'Quando decidimos nos cadastrar no site sabíamos que lidaríamos com o mundo virtual, ou seja nada de contato pessoal. A grande surpresa é que essa relação passou do virtual para o real é como se vocês tivessem pulado da tela para trabalhar aqui do nosso lado e hoje somos amigos.',
-    name: 'Dayse',
-    where: $sce.trustAsHtml('Funcionária da ONG <a ui-sref="root.nonprofit({slug: "parceiros"})" target="_blank"><strong> Monte Azul</strong></a>'),
-    image: 'dayse.jpg'
+    quote: 'A ação voluntária é algo especial, é um tempo que dedicamos para conquista do bem interior. Ganhamos em troca novas experiências com a alegria de outras pessoas, lugares, atitudes, momentos inesquecíveis ou todo carinho que pode ter no coração de uma criança.',
+    name: 'Alexandre Estevan',
+    where: 'Analise de Resultado Auto',
+    image: 'alexandre.jpg'
   }];
 });
