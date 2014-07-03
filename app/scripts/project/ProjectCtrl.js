@@ -110,11 +110,11 @@ app.controller('ProjectCtrl', function($scope, $rootScope, $state, $stateParams,
             '<p>Para ser voluntário, você precisar confirmar sua conta no Atados clicando no link que te mandamos por email quando você criou sua conta.</p>' +
             '<button class="btn btn-info" ng-click="ok()">Ok</button>' +
             '</div>',
-            controller: function ($scope, $modalInstance) {
+            controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
               $scope.ok = function () {
                 $modalInstance.close();
               };
-            }
+            }]
           });
         } else {
           toastr.error('Não conseguimos te atar. Por favor mande um email para resolvermos o problema: contato@atados.com.br');
