@@ -1,5 +1,4 @@
 <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[form.email.$invalid]">
   <input class="form-control" type='email' name="email" ng-model='object' placeholder="Email" required>
   <label class="help-block" ng-show="form.email.$error.alreadyUsed">Email já usado.</label>
-  <label class="help-block" ng-show="form.email.$error.notPortoSeguroEmail">Só emails da Porto Seguro (@portoseguro.com.br) podem logar no Porto Voluntário.</label>
 </div>

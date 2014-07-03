@@ -7,7 +7,7 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-md-5" ng-controller="LoginCtrl">
-      <p>Login com email @portoseguro.com.br</p>
+      <p>Login</p>
       <form novalidate name="loginForm" ng-submit="login()">
 
         <porto-seguro-email-input object="email" form="loginForm"></porto-seguro-email-input>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="col-md-offset-2 col-md-5" id="volunteer-signup-form" ng-controller="VolunteerSignupCtrl">
-      <p>... ou cadastre uma nova conta.</p>
+      <p>... ou cadastre uma nova conta com seu email pessoal.</p>
       <form novalidate name="signupForm" ng-submit="signup()">
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.slug.$error.required || signupForm.slug.$invalid || signupForm.slug.$error.minlength]">
           <input class="form-control" type='text' name="slug" ng-model='slug' ng-minlength="3" placeholder="Nome de usuário" required/>
@@ -57,6 +57,7 @@
         </div>
 
         <porto-seguro-email-input signup="true" object="email" form="signupForm"></porto-seguro-email-input>
+        <porto-seguro-matricula-input signup="true" object="matricula" form="signupForm"></porto-seguro-matricula-input>
 
         <div class="form-group" ng-class="{true: 'has-error', false: 'has-success'}[signupForm.password.$error.required || signupForm.password.$invalid]">
           <input class="form-control" required type='password' name='password' ng-model='password' ng-minlength="6" placeholder="Senha"/>

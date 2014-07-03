@@ -74,10 +74,27 @@ app.directive('neighborhoodInput', function () {
   };
 });
 
+//function validPortoSeguroEmail(email) {
+//  return email.indexOf('@portoseguro.com.br') >= 0;
+//}
 
-function validPortoSeguroEmail(email) {
-  return email.indexOf('@portoseguro.com.br') >= 0;
-}
+app.directive('portoSeguroMatriculaInput', [function(){
+  return {
+    restrict: 'E',
+    scope: {
+      object: '=',
+      form: '=',
+      signup: '='
+    },
+    templateUrl: '/partials/portoSeguroMatriculaInput.html',
+    link: function() {
+      $.mask.definitions['~']='[fp]';
+      $('#matricula').mask('~9999999?9?-9', {
+        placeholder: ''
+      });
+    }
+  };
+}]);
 
 app.directive('portoSeguroEmailInput', ['Auth', function(Auth){
   return {
@@ -92,7 +109,7 @@ app.directive('portoSeguroEmailInput', ['Auth', function(Auth){
       window.form  = scope.form;
       scope.$watch('object', function (value) {
         if (value) {
-          scope.form.email.$setValidity('notPortoSeguroEmail', validPortoSeguroEmail(value));
+          // scope.form.email.$setValidity('notPortoSeguroEmail', validPortoSeguroEmail(value));
           Auth.isEmailUsed(value, function (response) {
             scope.form.email.$setValidity('alreadyUsed', !response.alreadyUsed);
             if (!scope.signup) {
